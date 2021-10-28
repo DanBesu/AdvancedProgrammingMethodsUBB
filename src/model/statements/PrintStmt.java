@@ -6,14 +6,16 @@ import model.expressions.IExpression;
 import model.expressions.VariableExpr;
 
 public class PrintStmt implements IStatement {
+    IExpression expression;
+
     public PrintStmt(IExpression expression) {
+        this.expression = expression;
     }
 
-//        Exp exp;
-//        ...
+    // ...
+
     public String toString(){
-//        return "print(" + exp.toString()+")";
-        return "test";
+        return "print(" + expression.toString() + ")";
     }
 
     public ProgramState execute(ProgramState state) throws MyException {

@@ -8,27 +8,44 @@ import model.statements.IStatement;
 import model.values.IValue;
 
 public class ProgramState {
-     IStack<IStatement> exeStack;
-     IDict<String, IValue> symbolsTable;
+     IStack<IStatement> executionStack;
+     IDict<String, IValue> symbolsDict;
      IList<IValue> output;
      IStatement originalProgram;
 
 //    override toString
 //    getters / setters
 
-     ProgramState(IStack<IStatement> stack, IDict<String, IValue> sTable, IList<IValue> out, IStatement program){
-         exeStack = stack;
-         symbolsTable = sTable;
-         output = out;
+     ProgramState(IStack<IStatement> executionStack,
+                  IDict<String, IValue> symbolsDict,
+                  IList<IValue> output,
+                  IStatement originalProgram
+     ){
+         this.executionStack = executionStack;
+         this.symbolsDict = symbolsDict;
+         this.output = output;
+
 //         originalProgram = deepCopy();
 //         exeStack.push(program);
      }
 
-     public ProgramState execute(ProgramState state) throws MyException {
+    public IStack<IStatement> getExecutionStack() {
+        return executionStack;
+    }
+
+    public IDict<String, IValue> getSymbolsDict(){
+         return symbolsDict;
+    }
+
+    public IList<IValue> getOutput() {
+        return output;
+    }
+
+
+    public ProgramState execute(ProgramState state) throws MyException {
         return state;
      }
 
-    public IStack<IStatement> getStack() {
-         return null;
-    }
+
+
 }

@@ -1,23 +1,27 @@
 package model.statements;
 
+import model.ADTs.IStack;
 import model.ProgramState;
 import model.exceptions.MyException;
 
 public class CompoundStatement implements IStatement {
-    IStatement first;
-    IStatement snd;
+    IStatement statement1;
+    IStatement statement2;
 
     public CompoundStatement(IStatement statement1, IStatement statement2) {
+        this.statement1 = statement1;
+        this.statement2 = statement2;
     }
     // ...
 
     public String toString() {
-        return "("+first.toString() + ";" + snd.toString()+")";
+        return "("+ statement1.toString() + ";" + statement2.toString() + ")";
     }
 
     public ProgramState execute(ProgramState state) throws MyException {
-//        MyIStack<IStmt> stk=state.getStk() stk.push(snd);
-//        stk.push(first);
+        IStack<IStatement> executionStack = state.getExecutionStack();
+        executionStack.push(statement2);
+        executionStack.push(statement1);
         return state;
     }
 }

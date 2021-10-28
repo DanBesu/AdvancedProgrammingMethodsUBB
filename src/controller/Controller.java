@@ -10,7 +10,7 @@ public class Controller implements IController{
 
     IRepository repository;
     ProgramState oneStep(ProgramState state) throws MyException {
-        IStack<IStatement> stack = state.getStack();
+        IStack<IStatement> stack = state.getExecutionStack();
 
         if(stack.isEmpty())
             throw new MyException("program state stack is empty");
@@ -22,7 +22,7 @@ public class Controller implements IController{
     void allStep() throws MyException {
         ProgramState program = repository.getCurrentProgram();
         // print program state
-        while(!program.getStack().isEmpty()){
+        while(!program.getExecutionStack().isEmpty()){
             oneStep(program);
             // print program state
         }

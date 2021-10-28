@@ -1,27 +1,47 @@
 package model.statements;
 
+import model.ADTs.IDict;
+import model.ADTs.IStack;
 import model.ProgramState;
+import model.exceptions.AdtException;
+import model.exceptions.EvaluationException;
 import model.exceptions.MyException;
 import model.expressions.IExpression;
 import model.expressions.ValueExpr;
+import model.types.IType;
+import model.values.IValue;
 
 public class AssignStmt implements IStatement{
+    String variableName;
+    IExpression expression;
 
-    String id;
-
-    public AssignStmt(String id, IExpression valueExpr) {
+    public AssignStmt(String variableName, IExpression expression) {
+        this.variableName = variableName;
+        this.expression = expression;
     }
+    //    ...
 
-    //    Exp exp;
-//    ...
     public String toString(){
-//        return id + "=" + exp.toString();
-        return null;
+        return variableName + "=" + expression.toString();
     }
 
-    public ProgramState execute(ProgramState state) throws MyException {
-//        MyIStack<IStmt> stk = state.getStk();
-//        MyIDictionary<String, Value> symbolsTable = state.getSymTable();
+    public ProgramState execute(ProgramState state) throws MyException, AdtException, EvaluationException {
+        IStack<IStatement> executionStack = state.getExecutionStack();
+        IDict<String, IValue> symbolsDict = state.getSymbolsDict();
+
+        if(symbolsDict.isDefined(variableName)){
+            IValue expressionValue = expression.eval(symbolsDict);
+            IType variableType = symbolsDict.lookup(variableName).getType();
+
+            if(expressionValue.getType().equals(variableType)){
+                symbolsDict.update(variableName, expressionValue);
+            } else {
+                throw new MyException( "declared type of variable" + variableName + " and current type of the assigned expression do not match"
+                );
+            }
+        } else{
+            throw new MyException("the used variable" + variableName + " was not declared before");
+        }
 
 //        if(symTbl.isDefined(id)){
 //            Value val = exp.eval(symbolsTable);
