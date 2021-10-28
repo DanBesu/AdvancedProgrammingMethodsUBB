@@ -2,12 +2,17 @@ package model.statements;
 
 import model.ProgramState;
 import model.exceptions.MyException;
+import model.expressions.IExpression;
+import model.expressions.VariableExpr;
 
 public class IfStmt implements IStatement{
 
 //    Exp exp;
     IStatement thenS;
     IStatement elseS;
+
+    public IfStmt(IExpression condition, IStatement then_, IStatement else_) {
+    }
 //    ...
 
 //    IfStmt(Exp e, IStatement t, IStatement el){

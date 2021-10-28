@@ -2,11 +2,17 @@ package model.statements;
 
 import model.ProgramState;
 import model.exceptions.MyException;
+import model.expressions.IExpression;
+import model.expressions.ValueExpr;
 
 public class AssignStmt implements IStatement{
 
     String id;
-//    Exp exp;
+
+    public AssignStmt(String id, IExpression valueExpr) {
+    }
+
+    //    Exp exp;
 //    ...
     public String toString(){
 //        return id + "=" + exp.toString();

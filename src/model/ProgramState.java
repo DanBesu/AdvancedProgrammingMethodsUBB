@@ -27,4 +27,8 @@ public class ProgramState {
      public ProgramState execute(ProgramState state) throws MyException {
         return state;
      }
+
+    public IStack<IStatement> getStack() {
+         return null;
+    }
 }

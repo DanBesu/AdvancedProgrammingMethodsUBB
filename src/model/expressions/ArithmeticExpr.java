@@ -14,6 +14,9 @@ public class ArithmeticExpr implements IExpression{
 
     int operation; // 1 +, 2 -, 3 *, 4 /
 
+    public ArithmeticExpr(char operation, IExpression expression1, IExpression expression2) {
+    }
+
     @Override
     public IValue eval(IDict<String, IValue> table) throws MyException {
         IValue value1, value2;

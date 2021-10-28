@@ -3,9 +3,12 @@ package model.statements;
 import model.ProgramState;
 import model.exceptions.MyException;
 
-public class CompStmt implements IStatement {
+public class CompoundStatement implements IStatement {
     IStatement first;
     IStatement snd;
+
+    public CompoundStatement(IStatement statement1, IStatement statement2) {
+    }
     // ...
 
     public String toString() {
