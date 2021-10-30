@@ -12,10 +12,9 @@ public class CompoundStatement implements IStatement {
         this.statement1 = statement1;
         this.statement2 = statement2;
     }
-    // ...
 
     public String toString() {
-        return "("+ statement1.toString() + ";" + statement2.toString() + ")";
+        return "("+ statement1.toString() + "; " + statement2.toString() + ")";
     }
 
     public ProgramState execute(ProgramState state) throws MyException {

@@ -4,18 +4,22 @@ import model.types.IType;
 import model.types.IntType;
 
 public class IntValue implements IValue{
+    int value;
 
-    int val;
-    public IntValue(int v){
-        val = v;
+    public IntValue(){
+        value = intDefaultValue;
     }
 
-    public int getVal(){
-        return val;
+    public IntValue(int value){
+        this.value = value;
+    }
+
+    public int getValue(){
+        return value;
     }
 
     public String toString(){
-        return null;
+        return String.valueOf(value) + " ";
     }
 
     public IType getType() {

@@ -18,11 +18,11 @@ public class LogicExpr implements IExpression{
     public IValue eval(IDict<String, IValue> dict) throws MyException, AdtException, EvaluationException {
         IValue value1 = expression1.eval(dict);
         if(!value1.getType().equals(new BoolType()))
-            throw new EvaluationException("invalid boolean operand 1");
+            throw new EvaluationException("the first operand is not a boolean");
 
         IValue value2 = expression2.eval(dict);
         if(!value2.getType().equals(new BoolType()))
-            throw new EvaluationException("invalid boolean operand 2");
+            throw new EvaluationException("the second operand is not a boolean");
 
         BoolValue bool1 = (BoolValue) value1;
         BoolValue bool2 = (BoolValue) value2;
@@ -33,5 +33,8 @@ public class LogicExpr implements IExpression{
             default -> throw new EvaluationException("invalid boolean operator");
         };
     }
-//    ...
+
+    public String toString(){
+        return expression1.toString() + " " + operator + "  " + expression2.toString() + " ";
+    }
 }

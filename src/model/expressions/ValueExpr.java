@@ -11,9 +11,12 @@ public class ValueExpr implements IExpression{
     public ValueExpr(IValue value) {
         this.value = value;
     }
-    //    ...
 
     public IValue eval(IDict<String, IValue> table) throws MyException {
         return value;
+    }
+
+    public String toString(){
+        return value.toString() + " ";
     }
 }

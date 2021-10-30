@@ -31,17 +31,20 @@ public class ArithmeticExpr implements IExpression{
 
         switch (operator){
         case '+':
-            return new IntValue(int1.getVal() + int2.getVal());
+            return new IntValue(int1.getValue() + int2.getValue());
         case '-':
-            return new IntValue(int1.getVal() - int2.getVal());
+            return new IntValue(int1.getValue() - int2.getValue());
         case '*':
-            return new IntValue(int1.getVal() * int2.getVal());
+            return new IntValue(int1.getValue() * int2.getValue());
         case '/':
-            if(int2.getVal() == 0) throw new MyException("<div x=0/>");
-            return new IntValue(int1.getVal() / int2.getVal());
+            if(int2.getValue() == 0) throw new MyException("<div x=0/>");
+            return new IntValue(int1.getValue() / int2.getValue());
         default:
             throw new EvaluationException("invalid operator");
         }
     }
-//    ...
+
+    public String toString(){
+        return expression1.toString() + " " + operator + " " + this.expression2.toString() + " ";
+    }
 }

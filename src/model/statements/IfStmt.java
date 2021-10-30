@@ -1,31 +1,49 @@
 package model.statements;
 
+import model.ADTs.IDict;
+import model.ADTs.IStack;
 import model.ProgramState;
+import model.exceptions.AdtException;
+import model.exceptions.EvaluationException;
+import model.exceptions.ExecutionException;
 import model.exceptions.MyException;
 import model.expressions.IExpression;
 import model.expressions.VariableExpr;
+import model.types.BoolType;
+import model.values.BoolValue;
+import model.values.IValue;
 
 public class IfStmt implements IStatement{
 
-//    Exp exp;
+    IExpression condition;
     IStatement thenS;
     IStatement elseS;
 
-    public IfStmt(IExpression condition, IStatement then_, IStatement else_) {
+    public IfStmt(IExpression condition, IStatement thenS, IStatement elseS) {
+        this.condition = condition;
+        this.thenS = thenS;
+        this.elseS = elseS;
     }
-//    ...
 
-//    IfStmt(Exp e, IStatement t, IStatement el){
-//        exp = e;
-//        thenS = t;
-//        elseS = el;
-//    }
     public String toString(){
-//        return "(IF("+ exp.toString()+") THEN(" +thenS.toString() +")ELSE("+elseS.toString()+"))";
-        return null;
+        return " IF("+ condition.toString()+") THEN(" +thenS.toString() + ") ELSE("+ elseS.toString()+"))";
     }
 
-    public ProgramState execute(ProgramState state) throws MyException{
+    public ProgramState execute(ProgramState state) throws MyException, AdtException, EvaluationException, ExecutionException {
+        IDict<String, IValue> symbolsDict = state.getSymbolsDict();
+        IValue conditionValue = condition.eval(symbolsDict);
+
+        if(!(conditionValue.getType() instanceof BoolType)){
+            throw new ExecutionException("invalid type");
+        }
+
+        IStack<IStatement> executionStack = state.getExecutionStack();
+        if(((BoolValue) conditionValue).getValue())
+            executionStack.push(thenS);
+        else
+            executionStack.push(elseS);
+
         return state;
+        //todo: be careful: stack = state.stack, stack.push, return state
     }
 }

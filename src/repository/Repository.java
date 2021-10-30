@@ -1,5 +1,6 @@
 package repository;
 
+import model.ADTs.IList;
 import model.ProgramState;
 import model.expressions.ArithmeticExpr;
 import model.expressions.ValueExpr;
@@ -10,8 +11,10 @@ import model.types.IntType;
 import model.values.BoolValue;
 import model.values.IntValue;
 
-public class Repository implements IRepository{
+import java.util.ArrayList;
+import java.util.List;
 
+public class Repository implements IRepository{
     // ex 1
     // int v; v = 2; Print(v)
     IStatement ex1 = new CompoundStatement(
@@ -77,7 +80,17 @@ public class Repository implements IRepository{
             )
     );
 
-    public ProgramState getCurrentProgram() {
-        return null;
+    List<ProgramState> programStateList;
+
+    public Repository(){
+        programStateList = new ArrayList<>();
+    }
+
+    public void addProgramState(ProgramState programState){
+        programStateList.add(programState);
+    }
+
+    public ProgramState getCurrentProgramState() {
+        return programStateList.get(0);
     }
 }

@@ -15,4 +15,8 @@ public class VariableExpr implements IExpression{
     public IValue eval(IDict<String, IValue> table) throws AdtException {
         return table.lookup(variableName);
     }
+
+    public String toString(){
+        return variableName + " ";
+    }
 }

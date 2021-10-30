@@ -16,4 +16,18 @@ public class ExecutionStack <TElem> implements IStack<TElem>{
     public void push(TElem element) {
         stack.push(element);
     }
+
+    public String toString(){
+        if(stack.isEmpty()) {
+            return "{}";
+        }
+
+        String result = "{ ";
+        for(TElem element: this.stack) {
+            result += element.toString() + " | ";
+        }
+        result = result.substring(0, result.length() - 2);
+        result += "}";
+        return result;
+    }
 }

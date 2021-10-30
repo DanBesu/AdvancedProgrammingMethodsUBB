@@ -13,9 +13,6 @@ public class ProgramState {
      IList<IValue> output;
      IStatement originalProgram;
 
-//    override toString
-//    getters / setters
-
      ProgramState(IStack<IStatement> executionStack,
                   IDict<String, IValue> symbolsDict,
                   IList<IValue> output,
@@ -24,9 +21,8 @@ public class ProgramState {
          this.executionStack = executionStack;
          this.symbolsDict = symbolsDict;
          this.output = output;
-
-//         originalProgram = deepCopy();
-//         exeStack.push(program);
+         this.originalProgram = originalProgram;
+         executionStack.push(originalProgram);
      }
 
     public IStack<IStatement> getExecutionStack() {
@@ -41,11 +37,16 @@ public class ProgramState {
         return output;
     }
 
-
     public ProgramState execute(ProgramState state) throws MyException {
         return state;
-     }
+    }
 
+    public String toString(){
+        return "Program state: \n" +
+                "Execution stack: " + executionStack.toString() + '\n' +
+                "Symbols table: " + symbolsDict.toString() + '\n' +
+                "Out list: " + output.toString() + '\n';
+    }
 
 
 }
