@@ -6,15 +6,12 @@ import model.ProgramState;
 import model.exceptions.AdtException;
 import model.exceptions.EvaluationException;
 import model.exceptions.ExecutionException;
-import model.exceptions.MyException;
 import model.expressions.IExpression;
-import model.expressions.VariableExpr;
 import model.types.BoolType;
 import model.values.BoolValue;
 import model.values.IValue;
 
 public class IfStmt implements IStatement{
-
     IExpression condition;
     IStatement thenS;
     IStatement elseS;
@@ -26,10 +23,10 @@ public class IfStmt implements IStatement{
     }
 
     public String toString(){
-        return " IF("+ condition.toString()+") THEN(" +thenS.toString() + ") ELSE("+ elseS.toString()+"))";
+        return "IF("+ condition.toString()+") THEN(" +thenS.toString() + ") ELSE("+ elseS.toString()+"))";
     }
 
-    public ProgramState execute(ProgramState state) throws MyException, AdtException, EvaluationException, ExecutionException {
+    public ProgramState execute(ProgramState state) throws AdtException, EvaluationException, ExecutionException {
         IDict<String, IValue> symbolsDict = state.getSymbolsDict();
         IValue conditionValue = condition.eval(symbolsDict);
 
@@ -44,6 +41,5 @@ public class IfStmt implements IStatement{
             executionStack.push(elseS);
 
         return state;
-        //todo: be careful: stack = state.stack, stack.push, return state
     }
 }

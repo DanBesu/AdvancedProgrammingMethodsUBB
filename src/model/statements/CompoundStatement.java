@@ -2,7 +2,6 @@ package model.statements;
 
 import model.ADTs.IStack;
 import model.ProgramState;
-import model.exceptions.MyException;
 
 public class CompoundStatement implements IStatement {
     IStatement statement1;
@@ -14,10 +13,10 @@ public class CompoundStatement implements IStatement {
     }
 
     public String toString() {
-        return "("+ statement1.toString() + "; " + statement2.toString() + ")";
+        return "( "+ statement1.toString() + "; " + statement2.toString() + " )";
     }
 
-    public ProgramState execute(ProgramState state) throws MyException {
+    public ProgramState execute(ProgramState state) {
         IStack<IStatement> executionStack = state.getExecutionStack();
         executionStack.push(statement2);
         executionStack.push(statement1);

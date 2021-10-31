@@ -5,9 +5,7 @@ import model.ADTs.IList;
 import model.ProgramState;
 import model.exceptions.AdtException;
 import model.exceptions.EvaluationException;
-import model.exceptions.MyException;
 import model.expressions.IExpression;
-import model.expressions.VariableExpr;
 import model.values.IValue;
 
 public class PrintStmt implements IStatement {
@@ -21,7 +19,7 @@ public class PrintStmt implements IStatement {
         return "print(" + expression.toString() + ")";
     }
 
-    public ProgramState execute(ProgramState state) throws MyException, AdtException, EvaluationException {
+    public ProgramState execute(ProgramState state) throws AdtException, EvaluationException {
         IList<IValue> outputList = state.getOutput();
         IDict<String, IValue> symbolsTable = state.getSymbolsDict();
         IValue expressionValue = expression.eval(symbolsTable);

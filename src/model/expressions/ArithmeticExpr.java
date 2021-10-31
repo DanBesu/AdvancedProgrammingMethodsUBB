@@ -2,7 +2,6 @@ package model.expressions;
 import model.ADTs.IDict;
 import model.exceptions.AdtException;
 import model.exceptions.EvaluationException;
-import model.exceptions.MyException;
 import model.types.IntType;
 import model.values.IValue;
 import model.values.IntValue;
@@ -17,14 +16,14 @@ public class ArithmeticExpr implements IExpression{
         this.expression2 = expression2;
     }
 
-    public IValue eval(IDict<String, IValue> table) throws MyException, AdtException, EvaluationException {
+    public IValue eval(IDict<String, IValue> table) throws AdtException, EvaluationException {
         IValue value1 = expression1.eval(table);
         if (!value1.getType().equals(new IntType()))
-            throw new MyException("Wooow be careful, the first operand is not an Integer");
+            throw new EvaluationException("Wooow be careful, the first operand is not an Integer");
 
         IValue value2 = expression2.eval(table);
         if (!value2.getType().equals(new IntType()))
-            throw new MyException("Wooow be careful, the second operand is not an Integer");
+            throw new EvaluationException("Wooow be careful, the second operand is not an Integer");
 
         IntValue int1 = (IntValue) value1;
         IntValue int2 = (IntValue) value2;
@@ -37,7 +36,7 @@ public class ArithmeticExpr implements IExpression{
         case '*':
             return new IntValue(int1.getValue() * int2.getValue());
         case '/':
-            if(int2.getValue() == 0) throw new MyException("<div x=0/>");
+            if(int2.getValue() == 0) throw new EvaluationException("<div x=0/>");
             return new IntValue(int1.getValue() / int2.getValue());
         default:
             throw new EvaluationException("invalid operator");
@@ -45,6 +44,6 @@ public class ArithmeticExpr implements IExpression{
     }
 
     public String toString(){
-        return expression1.toString() + " " + operator + " " + this.expression2.toString() + " ";
+        return expression1.toString() + " " + operator + " " + this.expression2.toString();
     }
 }

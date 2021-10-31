@@ -1,11 +1,24 @@
 package model.ADTs;
 
-import java.util.Stack;
+import model.exceptions.AdtException;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class ExecutionStack <TElem> implements IStack<TElem>{
-    Stack<TElem> stack;
+    Deque<TElem> stack;
 
-    public TElem pop() {
+    public ExecutionStack(){
+        this.stack = new ArrayDeque<>();
+    }
+
+    public int size(){
+        return stack.size();
+    }
+
+    public TElem pop() throws AdtException {
+        if(stack.isEmpty())
+            throw new AdtException("empty stack");
         return stack.pop();
     }
 
@@ -21,13 +34,12 @@ public class ExecutionStack <TElem> implements IStack<TElem>{
         if(stack.isEmpty()) {
             return "{}";
         }
-
-        String result = "{ ";
+        StringBuilder result = new StringBuilder("{ ");
         for(TElem element: this.stack) {
-            result += element.toString() + " | ";
+            result.append(element.toString()).append(" | ");
         }
-        result = result.substring(0, result.length() - 2);
-        result += "}";
-        return result;
+        result = new StringBuilder(result.substring(0, result.length() - 2));
+        result.append("}");
+        return result.toString();
     }
 }

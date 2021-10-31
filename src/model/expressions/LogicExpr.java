@@ -2,7 +2,6 @@ package model.expressions;
 import model.ADTs.IDict;
 import model.exceptions.AdtException;
 import model.exceptions.EvaluationException;
-import model.exceptions.MyException;
 import model.types.BoolType;
 import model.values.BoolValue;
 import model.values.IValue;
@@ -15,7 +14,7 @@ public class LogicExpr implements IExpression{
         this.operator = operator;
     }
 
-    public IValue eval(IDict<String, IValue> dict) throws MyException, AdtException, EvaluationException {
+    public IValue eval(IDict<String, IValue> dict) throws AdtException, EvaluationException {
         IValue value1 = expression1.eval(dict);
         if(!value1.getType().equals(new BoolType()))
             throw new EvaluationException("the first operand is not a boolean");
@@ -35,6 +34,6 @@ public class LogicExpr implements IExpression{
     }
 
     public String toString(){
-        return expression1.toString() + " " + operator + "  " + expression2.toString() + " ";
+        return expression1.toString() + " " + operator + "  " + expression2.toString();
     }
 }

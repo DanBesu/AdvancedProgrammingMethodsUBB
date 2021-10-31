@@ -9,7 +9,7 @@ public class IntType implements IType{
     }
 
     public String toString(){
-        return "int ";
+        return "int";
     }
 
     public IValue getDefaultValue(){

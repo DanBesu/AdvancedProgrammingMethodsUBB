@@ -2,7 +2,6 @@ package model.ADTs;
 
 import model.exceptions.AdtException;
 import model.values.IValue;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,13 +48,12 @@ public class OutputList implements IList<IValue>{
         if(list.isEmpty()) {
             return "[]";
         }
-        // todo: solve warning
-        String result = "[ ";
+        StringBuilder result = new StringBuilder("[ ");
         for(IValue element: this.list) {
-            result = result + element.toString() + ", ";
+            result.append(element.toString()).append(", ");
         }
-        result = result.substring(0, result.length() - 2);
-        result = result + " ]";
-        return result;
+        result = new StringBuilder(result.substring(0, result.length() - 3));
+        result.append(" ]");
+        return result.toString();
     }
 }

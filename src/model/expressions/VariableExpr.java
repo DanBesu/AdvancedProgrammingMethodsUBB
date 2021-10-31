@@ -2,7 +2,6 @@ package model.expressions;
 
 import model.ADTs.IDict;
 import model.exceptions.AdtException;
-import model.exceptions.MyException;
 import model.values.IValue;
 
 public class VariableExpr implements IExpression{
@@ -17,6 +16,6 @@ public class VariableExpr implements IExpression{
     }
 
     public String toString(){
-        return variableName + " ";
+        return variableName;
     }
 }

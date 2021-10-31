@@ -4,14 +4,13 @@ import model.exceptions.AdtException;
 import model.values.IValue;
 
 import java.util.Collection;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SymbolsDict implements IDict<String, IValue>{
     Map<String, IValue> dict;
 
-    public SymbolsDict(Map<String, IValue> dict) {
+    public SymbolsDict() {
         this.dict = new HashMap<>();
     }
 
@@ -53,16 +52,14 @@ public class SymbolsDict implements IDict<String, IValue>{
         if(dict.isEmpty()) {
             return "{}";
         }
-
-        // todo: solve warning
-        String result = "{ ";
+        StringBuilder result = new StringBuilder("{ ");
         Collection<String> keys = dict.keySet();
 
         for(String key: keys) {
-            result = result + key + " -> " + dict.get(key) + ", ";
+            result.append(key).append(": ").append(dict.get(key)).append(", ");
         }
-        result = result.substring(0, result.length() - 2);
-        result += " }";
-        return result;
+        result = new StringBuilder(result.substring(0, result.length() - 2));
+        result.append(" }");
+        return result.toString();
     }
 }
