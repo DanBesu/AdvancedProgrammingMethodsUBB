@@ -29,7 +29,7 @@ public class UI {
     // ex2
     // int a; int b; a = 2 + 3*5; b = a + 1; Print(b)
     static IStatement ex2 = new CompoundStatement(
-            new VariableDeclarationStmt("a",new IntType()),
+            new VariableDeclarationStmt("a", new IntType()),
             new CompoundStatement(
                     new VariableDeclarationStmt("b", new IntType()),
                     new CompoundStatement(
@@ -130,6 +130,7 @@ public class UI {
         boolean isRunning = true;
 
         while (isRunning){
+            System.out.println("Command...");
             command = scanner.nextLine();
             try {
                 switch (command) {
@@ -144,10 +145,6 @@ public class UI {
             catch (Exception error){
                 System.out.println(error.toString());
             }
-            // todo: cleanup
-            // todo: check exceptions
-            // todo: test more
-            // todo: throws Exception
         }
     }
 }

@@ -1,15 +1,6 @@
 package repository;
 
-import model.ADTs.IList;
 import model.ProgramState;
-import model.expressions.ArithmeticExpr;
-import model.expressions.ValueExpr;
-import model.expressions.VariableExpr;
-import model.statements.*;
-import model.types.BoolType;
-import model.types.IntType;
-import model.values.BoolValue;
-import model.values.IntValue;
 
 import java.util.ArrayList;
 import java.util.List;
