@@ -1,0 +1,50 @@
+
+ >>> Program state: 
+Execution stack: {
+    int v; v = 2 ; print(v);
+}
+Symbols table: {-}
+Out list: []
+
+ >>> Program state: 
+Execution stack: {
+    int v;
+    v = 2 ; print(v);
+}
+Symbols table: {-}
+Out list: []
+
+ >>> Program state: 
+Execution stack: {
+    v = 2 ; print(v);
+}
+Symbols table: {
+    v -> 0 
+ }
+Out list: []
+
+ >>> Program state: 
+Execution stack: {
+    v = 2 ;
+    print(v);
+}
+Symbols table: {
+    v -> 0 
+ }
+Out list: []
+
+ >>> Program state: 
+Execution stack: {
+    print(v);
+}
+Symbols table: {
+    v -> 2 
+ }
+Out list: []
+
+ >>> Program state: 
+Execution stack: {}
+Symbols table: {
+    v -> 2 
+ }
+Out list: [ 2 ]

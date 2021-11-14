@@ -9,6 +9,8 @@ import model.statements.IStatement;
 import repository.IRepository;
 import repository.Repository;
 
+import java.io.IOException;
+
 public class Controller {
     IRepository repository;
 
@@ -34,15 +36,17 @@ public class Controller {
         currentStatement.execute(state);
     }
 
-    public ProgramState allStep() throws AdtException, EvaluationException, ExecutionException {
+    public ProgramState allStep() throws Exception {
+        repository.clearLogFile();
         ProgramState programState = repository.getCurrentProgramState();
+        repository.logProgramStateExecution(programState);
         System.out.println(programState);
 
         while(!programState.getExecutionStack().isEmpty()){
             oneStep(programState);
+            repository.logProgramStateExecution(programState);
             System.out.println(programState);
         }
-
         return programState;
     }
 }

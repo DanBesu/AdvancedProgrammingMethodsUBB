@@ -2,6 +2,10 @@ package repository;
 
 import model.ProgramState;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +35,19 @@ public class Repository implements IRepository{
 
     public ProgramState getCurrentProgramState() {
         return programStateList.get(0);
+    }
+
+    public void logProgramStateExecution(ProgramState programState) throws IOException {
+        PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
+
+        logFile.write(programState.toString());
+//        logFile.append(programState.toString());
+        logFile.close();
+    }
+
+    public void clearLogFile() throws Exception {
+        PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, false)));
+        logFile.write("");
+        logFile.close();
     }
 }

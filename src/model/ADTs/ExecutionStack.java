@@ -34,12 +34,12 @@ public class ExecutionStack <TElem> implements IStack<TElem>{
         if(stack.isEmpty()) {
             return "{}";
         }
-        StringBuilder result = new StringBuilder("{ ");
+        StringBuilder result = new StringBuilder("{\n");
         for(TElem element: this.stack) {
-            result.append(element.toString()).append(" | ");
+            result.append("    ").append(element.toString()).append(";\n");
         }
-        result = new StringBuilder(result.substring(0, result.length() - 2));
-        result.append("}");
+        result = new StringBuilder(result.substring(0, result.length()));
+        result.append('}');
         return result.toString();
     }
 }

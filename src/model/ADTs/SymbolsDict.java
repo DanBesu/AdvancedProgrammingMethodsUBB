@@ -50,15 +50,15 @@ public class SymbolsDict implements IDict<String, IValue>{
 
     public String toString(){
         if(dict.isEmpty()) {
-            return "{}";
+            return "{-}";
         }
-        StringBuilder result = new StringBuilder("{ ");
+        StringBuilder result = new StringBuilder("{\n");
         Collection<String> keys = dict.keySet();
 
         for(String key: keys) {
-            result.append(key).append(": ").append(dict.get(key)).append(", ");
+            result.append("    ").append(key).append(" -> ").append(dict.get(key)).append('\n');
         }
-        result = new StringBuilder(result.substring(0, result.length() - 2));
+        result = new StringBuilder(result.substring(0, result.length()));
         result.append(" }");
         return result.toString();
     }

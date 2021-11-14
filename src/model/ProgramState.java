@@ -43,7 +43,7 @@ public class ProgramState {
     }
 
     public String toString(){
-        return "Program state: \n" +
+        return "\n >>> Program state: \n" +
                 "Execution stack: " + executionStack.toString() + '\n' +
                 "Symbols table: " + symbolsDict.toString() + '\n' +
                 "Out list: " + output.toString() + '\n';

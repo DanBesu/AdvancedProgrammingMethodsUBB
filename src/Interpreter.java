@@ -70,7 +70,7 @@ public class Interpreter {
                 )
         );
         List<ProgramState> program2 = new ArrayList<>();
-        program2.add(new ProgramState(ex1));
+        program2.add(new ProgramState(ex2));
         IRepository repository2 = new Repository(program2, "log2.txt");
         Controller controller2 = new Controller(repository2);
 
@@ -96,7 +96,7 @@ public class Interpreter {
                 )
         );
         List<ProgramState> program3 = new ArrayList<>();
-        program3.add(new ProgramState(ex2));
+        program3.add(new ProgramState(ex3));
         IRepository repository3 = new Repository(program3, "log3.txt");
         Controller controller3 = new Controller(repository3);
 
