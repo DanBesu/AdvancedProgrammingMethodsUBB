@@ -8,9 +8,21 @@ import java.util.List;
 public class Repository implements IRepository{
 
     List<ProgramState> programStateList;
+    String logFilePath;
 
     public Repository(){
         programStateList = new ArrayList<>();
+        logFilePath = "";
+    }
+
+    public Repository(String logFilePath){
+        programStateList = new ArrayList<>();
+        this.logFilePath = logFilePath;
+    }
+
+    public Repository(List<ProgramState> programStateList, String logFilePath){
+        this.programStateList = programStateList;
+        this.logFilePath = logFilePath;
     }
 
     public void addProgramState(ProgramState programState){

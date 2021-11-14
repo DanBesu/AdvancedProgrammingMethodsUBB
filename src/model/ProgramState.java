@@ -1,8 +1,6 @@
 package model;
 
-import model.ADTs.IDict;
-import model.ADTs.IList;
-import model.ADTs.IStack;
+import model.ADTs.*;
 import model.statements.IStatement;
 import model.values.IValue;
 
@@ -22,6 +20,14 @@ public class ProgramState {
          this.output = output;
          this.originalProgram = originalProgram;
          this.executionStack.push(originalProgram);
+     }
+
+     public ProgramState(IStatement program){
+         executionStack = new ExecutionStack<>();
+         symbolsDict = new SymbolsDict();
+         output = new OutputList();
+         this.originalProgram = program;
+         this.executionStack.push(program);
      }
 
     public IStack<IStatement> getExecutionStack() {

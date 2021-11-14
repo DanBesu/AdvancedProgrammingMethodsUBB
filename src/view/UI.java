@@ -97,7 +97,7 @@ public class UI {
             case "3" -> programState = new ProgramState(executionStack, symbolsTable, outputList, ex3);
             default -> throw new ExecutionException("Unexpected value: " + example);
         }
-
+        System.out.println("program" + programState);
         controller.addProgramState(programState);
     }
 

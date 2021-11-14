@@ -16,18 +16,22 @@ public class Controller {
         repository = new Repository();
     }
 
+    public Controller(IRepository repository){
+        this.repository = repository;
+    }
+
     public void addProgramState(ProgramState programState){
         repository.addProgramState(programState);
     }
 
-    public ProgramState oneStep(ProgramState state) throws AdtException, EvaluationException, ExecutionException {
+    public void oneStep(ProgramState state) throws AdtException, EvaluationException, ExecutionException {
         IStack<IStatement> stack = state.getExecutionStack();
 
         if(stack.isEmpty())
             throw new AdtException("program state stack is empty");
 
         IStatement currentStatement = stack.pop();
-        return currentStatement.execute(state);
+        currentStatement.execute(state);
     }
 
     public ProgramState allStep() throws AdtException, EvaluationException, ExecutionException {

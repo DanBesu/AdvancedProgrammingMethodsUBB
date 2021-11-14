@@ -27,7 +27,7 @@ public class AssignStmt implements IStatement{
         IDict<String, IValue> symbolsDict = state.getSymbolsDict();
 
         if (!symbolsDict.isDefined(variableName))
-            throw new ExecutionException("the used variable" + variableName + " was not declared before");
+            throw new ExecutionException("the used variable " + variableName + " was not declared before");
 
         IValue expressionValue = expression.eval(symbolsDict);
         IType variableType = symbolsDict.lookup(variableName).getType();
