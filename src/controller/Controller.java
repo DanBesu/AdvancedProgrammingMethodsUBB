@@ -26,7 +26,7 @@ public class Controller {
         repository.addProgramState(programState);
     }
 
-    public void oneStep(ProgramState state) throws AdtException, EvaluationException, ExecutionException {
+    public void oneStep(ProgramState state) throws Exception {
         IStack<IStatement> stack = state.getExecutionStack();
 
         if(stack.isEmpty())

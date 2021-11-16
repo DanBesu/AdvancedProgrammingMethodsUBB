@@ -4,14 +4,17 @@ import model.ADTs.IList;
 import model.ADTs.IStack;
 import model.ProgramState;
 import model.expressions.ArithmeticExpr;
+import model.expressions.RelationalExpression;
 import model.expressions.ValueExpr;
 import model.expressions.VariableExpr;
 import model.statements.*;
 import model.types.BoolType;
 import model.types.IntType;
+import model.types.StringType;
 import model.values.BoolValue;
 import model.values.IValue;
 import model.values.IntValue;
+import model.values.StringValue;
 import repository.IRepository;
 import repository.Repository;
 import view.ExitCommand;
@@ -79,14 +82,14 @@ public class Interpreter {
         // If a Then v = 2 Else v = 3;
         // Print(v)
         IStatement ex3 = new CompoundStatement(
-                new VariableDeclarationStmt("a", new BoolType()),
+                new VariableDeclarationStmt("a", new IntType()),
                 new CompoundStatement(
                         new VariableDeclarationStmt("v", new IntType()),
                         new CompoundStatement(
-                                new AssignStmt("a", new ValueExpr(new BoolValue(true))),
+                                new AssignStmt("a", new ValueExpr(new IntValue(3))),
                                 new CompoundStatement(
                                         new IfStmt(
-                                                new VariableExpr("a"),
+                                                new RelationalExpression(">", new ValueExpr(new IntValue(4)), new VariableExpr("a")),
                                                 new AssignStmt("v", new ValueExpr(new IntValue(2))),
                                                 new AssignStmt("v", new ValueExpr(new IntValue(3)))
                                         ),
@@ -100,11 +103,50 @@ public class Interpreter {
         IRepository repository3 = new Repository(program3, "log3.txt");
         Controller controller3 = new Controller(repository3);
 
+        IStatement ex4= new CompoundStatement(
+                new VariableDeclarationStmt("varf", new StringType()),
+                new CompoundStatement(
+                        new AssignStmt(
+                                "varf" ,
+                                new ValueExpr(
+                                new StringValue("test.in"))),
+                        new CompoundStatement(
+                                new OpenReadFile(new VariableExpr("varf")),
+                                new CompoundStatement(
+                                        new VariableDeclarationStmt("varc",new IntType()),
+                                        new CompoundStatement(
+                                                new ReadFileStatement(
+                                                        new VariableExpr("varf"),
+                                                        new StringValue("varc")
+                                                ),
+                                                new CompoundStatement(
+                                                        new ReadFileStatement(
+                                                                new VariableExpr("varf"),
+                                                                new StringValue("varc")
+                                                        ),
+                                                        new CompoundStatement(
+                                                                new PrintStmt(new VariableExpr("varc")),
+                                                                new CloseReadFileStatement(
+                                                                        new VariableExpr("varf")
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                )
+        );
+        List<ProgramState> program4 = new ArrayList<>();
+        program4.add(new ProgramState(ex4));
+        IRepository repository4 = new Repository(program4, "log4.txt");
+        Controller controller4 = new Controller(repository4);
+
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("x", "exit"));
         menu.addCommand(new RunExample("1", ex1.toString(), controller1));
         menu.addCommand(new RunExample("2", ex2.toString(), controller2));
         menu.addCommand(new RunExample("3", ex3.toString(), controller3));
+        menu.addCommand(new RunExample("4", ex4.toString(), controller4));
         menu.show();
     }
 }

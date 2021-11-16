@@ -5,6 +5,8 @@ import model.exceptions.AdtException;
 import model.exceptions.EvaluationException;
 import model.exceptions.ExecutionException;
 
+import java.io.FileNotFoundException;
+
 public interface IStatement {
-    ProgramState execute(ProgramState state) throws AdtException, EvaluationException, ExecutionException;
+    ProgramState execute(ProgramState state) throws Exception;
 }

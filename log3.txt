@@ -1,79 +1,87 @@
 
  >>> Program state: 
 Execution stack: {
-    bool a; int v; a = true; IF(a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
+    int a; int v; a = 3 ; IF(4  > a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
 }
 Symbols table: {-}
 Out list: []
+File table: {-}
 
  >>> Program state: 
 Execution stack: {
-    bool a;
-    int v; a = true; IF(a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
+    int a;
+    int v; a = 3 ; IF(4  > a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
 }
 Symbols table: {-}
 Out list: []
+File table: {-}
 
  >>> Program state: 
 Execution stack: {
-    int v; a = true; IF(a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
+    int v; a = 3 ; IF(4  > a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
 }
 Symbols table: {
-    a -> false
+    a -> 0 
  }
 Out list: []
+File table: {-}
 
  >>> Program state: 
 Execution stack: {
     int v;
-    a = true; IF(a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
+    a = 3 ; IF(4  > a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
 }
 Symbols table: {
-    a -> false
+    a -> 0 
  }
 Out list: []
+File table: {-}
 
  >>> Program state: 
 Execution stack: {
-    a = true; IF(a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
+    a = 3 ; IF(4  > a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
 }
 Symbols table: {
-    a -> false
+    a -> 0 
     v -> 0 
  }
 Out list: []
+File table: {-}
 
  >>> Program state: 
 Execution stack: {
-    a = true;
-    IF(a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
+    a = 3 ;
+    IF(4  > a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
 }
 Symbols table: {
-    a -> false
+    a -> 0 
     v -> 0 
  }
 Out list: []
+File table: {-}
 
  >>> Program state: 
 Execution stack: {
-    IF(a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
+    IF(4  > a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
 }
 Symbols table: {
-    a -> true
+    a -> 3 
     v -> 0 
  }
 Out list: []
+File table: {-}
 
  >>> Program state: 
 Execution stack: {
-    IF(a) THEN(v = 2 ) ELSE(v = 3 ));
+    IF(4  > a) THEN(v = 2 ) ELSE(v = 3 ));
     print(v);
 }
 Symbols table: {
-    a -> true
+    a -> 3 
     v -> 0 
  }
 Out list: []
+File table: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -81,25 +89,28 @@ Execution stack: {
     print(v);
 }
 Symbols table: {
-    a -> true
+    a -> 3 
     v -> 0 
  }
 Out list: []
+File table: {-}
 
  >>> Program state: 
 Execution stack: {
     print(v);
 }
 Symbols table: {
-    a -> true
+    a -> 3 
     v -> 2 
  }
 Out list: []
+File table: {-}
 
  >>> Program state: 
 Execution stack: {}
 Symbols table: {
-    a -> true
+    a -> 3 
     v -> 2 
  }
 Out list: [ 2 ]
+File table: {-}
