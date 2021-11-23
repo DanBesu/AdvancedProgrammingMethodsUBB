@@ -28,7 +28,8 @@ public class IfStmt implements IStatement{
 
     public ProgramState execute(ProgramState state) throws AdtException, EvaluationException, ExecutionException {
         IDict<String, IValue> symbolsDict = state.getSymbolsDict();
-        IValue conditionValue = condition.eval(symbolsDict);
+        IDict<Integer, IValue> heap = state.getHeap();
+        IValue conditionValue = condition.eval(symbolsDict, heap);
 
         if(!(conditionValue.getType() instanceof BoolType)){
             throw new ExecutionException("invalid type");

@@ -20,7 +20,8 @@ public class WhileStatement implements IStatement{
     @Override
     public ProgramState execute(ProgramState state) throws Exception {
         IStack<IStatement> stack = state.getExecutionStack();
-        IValue expressionValue = expression.eval(state.getSymbolsDict());
+        IValue expressionValue = expression.eval(state.getSymbolsDict(), state.getHeap());
+
         if(!expressionValue.getType().equals(new BoolType())){
             throw new EvaluationException("while condition is not a boolean");
         }

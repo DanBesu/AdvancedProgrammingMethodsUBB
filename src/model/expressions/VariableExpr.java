@@ -11,7 +11,7 @@ public class VariableExpr implements IExpression{
         this.variableName = variableName;
     }
 
-    public IValue eval(IDict<String, IValue> table) throws AdtException {
+    public IValue eval(IDict<String, IValue> table, IDict<Integer, IValue> heap) throws AdtException {
         return table.lookup(variableName);
     }
 

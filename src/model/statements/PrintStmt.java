@@ -22,7 +22,9 @@ public class PrintStmt implements IStatement {
     public ProgramState execute(ProgramState state) throws AdtException, EvaluationException {
         IList<IValue> outputList = state.getOutput();
         IDict<String, IValue> symbolsTable = state.getSymbolsDict();
-        IValue expressionValue = expression.eval(symbolsTable);
+        IDict<Integer, IValue> heap = state.getHeap();
+
+        IValue expressionValue = expression.eval(symbolsTable, heap);
         outputList.add(expressionValue);
         return state;
     }

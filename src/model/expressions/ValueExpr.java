@@ -10,7 +10,7 @@ public class ValueExpr implements IExpression{
         this.value = value;
     }
 
-    public IValue eval(IDict<String, IValue> table) {
+    public IValue eval(IDict<String, IValue> table, IDict<Integer, IValue> heap) {
         return value;
     }
 

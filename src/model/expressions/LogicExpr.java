@@ -14,12 +14,12 @@ public class LogicExpr implements IExpression{
         this.operator = operator;
     }
 
-    public IValue eval(IDict<String, IValue> dict) throws AdtException, EvaluationException {
-        IValue value1 = expression1.eval(dict);
+    public IValue eval(IDict<String, IValue> dict, IDict<Integer, IValue> heap) throws AdtException, EvaluationException {
+        IValue value1 = expression1.eval(dict, heap);
         if(!value1.getType().equals(new BoolType()))
             throw new EvaluationException("the first operand is not a boolean");
 
-        IValue value2 = expression2.eval(dict);
+        IValue value2 = expression2.eval(dict, heap);
         if(!value2.getType().equals(new BoolType()))
             throw new EvaluationException("the second operand is not a boolean");
 

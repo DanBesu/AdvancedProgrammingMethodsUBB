@@ -20,9 +20,9 @@ public class RelationalExpression implements IExpression{
     }
 
     @Override
-    public IValue eval(IDict<String, IValue> table) throws AdtException, EvaluationException {
-        IValue v1 = e1.eval(table);
-        IValue v2 = e2.eval(table);
+    public IValue eval(IDict<String, IValue> table, IDict<Integer, IValue> heap) throws AdtException, EvaluationException {
+        IValue v1 = e1.eval(table, heap);
+        IValue v2 = e2.eval(table, heap);
 
         if(!v1.getType().equals(new IntType()))
             throw new EvaluationException("the first operand is not an integer");

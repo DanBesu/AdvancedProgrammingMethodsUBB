@@ -5,6 +5,6 @@ import model.exceptions.EvaluationException;
 import model.values.IValue;
 
 public interface IExpression {
-    IValue eval(IDict<String, IValue> table) throws AdtException, EvaluationException;
+    IValue eval(IDict<String, IValue> table, IDict<Integer, IValue> heap) throws AdtException, EvaluationException;
     String toString();
 }

@@ -25,11 +25,12 @@ public class AssignStmt implements IStatement{
 
     public ProgramState execute(ProgramState state) throws AdtException, EvaluationException, ExecutionException {
         IDict<String, IValue> symbolsDict = state.getSymbolsDict();
+        IDict<Integer, IValue> heap = state.getHeap();
 
         if (!symbolsDict.isDefined(variableName))
             throw new ExecutionException("the used variable " + variableName + " was not declared before");
 
-        IValue expressionValue = expression.eval(symbolsDict);
+        IValue expressionValue = expression.eval(symbolsDict, heap);
         IType variableType = symbolsDict.lookup(variableName).getType();
 
         if (expressionValue.getType().equals(variableType))

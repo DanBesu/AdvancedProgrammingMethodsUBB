@@ -6,6 +6,7 @@ Execution stack: {
 Symbols table: {-}
 Out list: []
 File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -15,6 +16,7 @@ Execution stack: {
 Symbols table: {-}
 Out list: []
 File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -25,6 +27,7 @@ Symbols table: {
  }
 Out list: []
 File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -36,6 +39,7 @@ Symbols table: {
  }
 Out list: []
 File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -46,6 +50,7 @@ Symbols table: {
  }
 Out list: []
 File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {}
@@ -54,3 +59,4 @@ Symbols table: {
  }
 Out list: [ 2 ]
 File table: {-}
+Heap: {-}

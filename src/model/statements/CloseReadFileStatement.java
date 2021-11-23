@@ -22,8 +22,9 @@ public class CloseReadFileStatement implements IStatement{
     public ProgramState execute(ProgramState state) throws Exception {
         IDict<String, IValue> symbolTable = state.getSymbolsDict();
         IDict<StringValue, BufferedReader> fileTable = state.getFileTable();
+        IDict<Integer, IValue> heap = state.getHeap();
 
-        IValue filePathValue = this.filePath.eval(symbolTable);
+        IValue filePathValue = this.filePath.eval(symbolTable, heap);
 
         if(!filePathValue.getType().equals(new StringType()))
             throw new EvaluationException("file path should be a string");

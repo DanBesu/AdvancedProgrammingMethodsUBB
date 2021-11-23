@@ -27,7 +27,8 @@ public class OpenReadFile implements IStatement {
     public ProgramState execute(ProgramState state) throws AdtException, EvaluationException, ExecutionException, FileNotFoundException {
         IDict<String, IValue> symbolTable = state.getSymbolsDict();
         IDict<StringValue, BufferedReader> fileTable = state.getFileTable();
-        IValue filePathValue = filePath.eval(symbolTable);
+        IDict<Integer, IValue> heap = state.getHeap();
+        IValue filePathValue = filePath.eval(symbolTable, heap);
 
         if (!filePathValue.getType().equals(new StringType()))
             throw new EvaluationException("File path should be a string");

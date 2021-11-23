@@ -34,7 +34,8 @@ public class ReadFileStatement implements IStatement{
         }
 
         IDict<StringValue, BufferedReader> fileTable = state.getFileTable();
-        IValue filePathValue = this.filePath.eval(symbolsTable);
+        IDict<Integer, IValue> heap = state.getHeap();
+        IValue filePathValue = this.filePath.eval(symbolsTable, heap);
 
         if(!filePathValue.getType().equals(new StringType())){
             throw new EvaluationException("the file path should be a string");

@@ -16,12 +16,12 @@ public class ArithmeticExpr implements IExpression{
         this.expression2 = expression2;
     }
 
-    public IValue eval(IDict<String, IValue> table) throws AdtException, EvaluationException {
-        IValue value1 = expression1.eval(table);
+    public IValue eval(IDict<String, IValue> table, IDict<Integer, IValue> heap) throws AdtException, EvaluationException {
+        IValue value1 = expression1.eval(table, heap);
         if (!value1.getType().equals(new IntType()))
             throw new EvaluationException("Wooow be careful, the first operand is not an Integer");
 
-        IValue value2 = expression2.eval(table);
+        IValue value2 = expression2.eval(table, heap);
         if (!value2.getType().equals(new IntType()))
             throw new EvaluationException("Wooow be careful, the second operand is not an Integer");
 

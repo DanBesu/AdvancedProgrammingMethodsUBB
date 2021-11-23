@@ -5,6 +5,8 @@ Execution stack: {
 }
 Symbols table: {-}
 Out list: []
+File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -13,6 +15,8 @@ Execution stack: {
 }
 Symbols table: {-}
 Out list: []
+File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -22,6 +26,8 @@ Symbols table: {
     a -> 0 
  }
 Out list: []
+File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -32,6 +38,8 @@ Symbols table: {
     a -> 0 
  }
 Out list: []
+File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -42,6 +50,8 @@ Symbols table: {
     b -> 0 
  }
 Out list: []
+File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -53,6 +63,8 @@ Symbols table: {
     b -> 0 
  }
 Out list: []
+File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -63,6 +75,8 @@ Symbols table: {
     b -> 0 
  }
 Out list: []
+File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -74,6 +88,8 @@ Symbols table: {
     b -> 0 
  }
 Out list: []
+File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {
@@ -84,6 +100,8 @@ Symbols table: {
     b -> 18 
  }
 Out list: []
+File table: {-}
+Heap: {-}
 
  >>> Program state: 
 Execution stack: {}
@@ -92,3 +110,5 @@ Symbols table: {
     b -> 18 
  }
 Out list: [ 18 ]
+File table: {-}
+Heap: {-}
