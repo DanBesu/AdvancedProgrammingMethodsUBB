@@ -1,19 +1,10 @@
 import controller.Controller;
-import model.ADTs.IDict;
-import model.ADTs.IList;
-import model.ADTs.IStack;
 import model.ProgramState;
-import model.expressions.ArithmeticExpr;
-import model.expressions.RelationalExpression;
-import model.expressions.ValueExpr;
-import model.expressions.VariableExpr;
+import model.expressions.*;
 import model.statements.*;
-import model.types.BoolType;
 import model.types.IntType;
 import model.types.ReferenceType;
 import model.types.StringType;
-import model.values.BoolValue;
-import model.values.IValue;
 import model.values.IntValue;
 import model.values.StringValue;
 import repository.IRepository;
@@ -155,7 +146,6 @@ public class Interpreter {
         IRepository repository5 = new Repository(program5, "log5.txt");
         Controller controller5 = new Controller(repository5);
 
-
         // Ref int v;new(v,20);Ref Ref int a; new(a,v); new(v,30);print(rH(rH(a)))
         IStatement ex6 = new CompoundStatement(new VariableDeclarationStmt("v", new ReferenceType(new IntType())),
                 new CompoundStatement(new HeapAllocationStatement("v", new ValueExpr(new IntValue(20))),
@@ -169,6 +159,35 @@ public class Interpreter {
         IRepository repository6 = new Repository(program6, "log6.txt");
         Controller controller6 = new Controller(repository6);
 
+        IStatement ex9 = new CompoundStatement(
+                new VariableDeclarationStmt(
+                        "v",
+                        new IntType()),
+                new CompoundStatement(
+                        new AssignStmt(
+                                "v",
+                                new ValueExpr(new IntValue(4))
+                        ),
+                        new CompoundStatement(
+                                new WhileStatement(
+                                        new RelationalExpression(">", new VariableExpr("v"), new ValueExpr(new IntValue(0))),
+                                        new CompoundStatement(
+                                                new PrintStmt(
+                                                        new VariableExpr("v")
+                                                ),
+                                                new AssignStmt(
+                                                        "v",
+                                                        new ArithmeticExpr('-', new VariableExpr("v"), new ValueExpr( new IntValue(1))))
+                                        )
+                                ),
+                                new PrintStmt(new VariableExpr("v")))
+                )
+        );
+        List<ProgramState> program9 = new ArrayList<>();
+        program9.add(new ProgramState(ex9));
+        IRepository repository9 = new Repository(program9, "log9.txt");
+        Controller controller9 = new Controller(repository9);
+
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("x", "exit"));
         menu.addCommand(new RunExample("1", ex1.toString(), controller1));
@@ -177,6 +196,7 @@ public class Interpreter {
         menu.addCommand(new RunExample("4", ex4.toString(), controller4));
         menu.addCommand(new RunExample("5", ex5.toString(), controller5));
         menu.addCommand(new RunExample("6", ex6.toString(), controller6));
+        menu.addCommand(new RunExample("9", ex9.toString(), controller9));
         menu.show();
     }
 }

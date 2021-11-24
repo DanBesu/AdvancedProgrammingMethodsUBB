@@ -62,4 +62,13 @@ public class SymbolsDict<TKey, TValue> implements IDict<TKey, TValue>{
         result.append(" }");
         return result.toString();
     }
+
+    public void setContent(Map<TKey, TValue> newContent) {
+        dict = newContent;
+    }
+
+    @Override
+    public Map<TKey, TValue> getContent() {
+        return dict;
+    }
 }

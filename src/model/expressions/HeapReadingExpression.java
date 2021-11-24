@@ -1,4 +1,4 @@
-package model.statements;
+package model.expressions;
 
 import model.ADTs.IDict;
 import model.exceptions.AdtException;
