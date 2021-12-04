@@ -1,5 +1,6 @@
 
  >>> Program state: 
+Thread ID:0
 Execution stack: {
     Ref(int) v; new(v, 20 ); Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
 }
@@ -9,6 +10,7 @@ File table: {-}
 Heap: {-}
 
  >>> Program state: 
+Thread ID:0
 Execution stack: {
     Ref(int) v;
     new(v, 20 ); Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
@@ -19,17 +21,40 @@ File table: {-}
 Heap: {-}
 
  >>> Program state: 
+Thread ID:0
 Execution stack: {
+    Ref(int) v;
     new(v, 20 ); Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
 }
-Symbols table: {
-    v -> (0, int)
- }
+Symbols table: {-}
 Out list: []
 File table: {-}
 Heap: {-}
 
  >>> Program state: 
+Thread ID:0
+Execution stack: {
+    Ref(int) v;
+    new(v, 20 ); Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    Ref(int) v;
+    new(v, 20 ); Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>> Program state: 
+Thread ID:0
 Execution stack: {
     new(v, 20 );
     Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
@@ -42,47 +67,98 @@ File table: {-}
 Heap: {-}
 
  >>> Program state: 
+Thread ID:0
 Execution stack: {
+    new(v, 20 );
     Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
 }
 Symbols table: {
-    v -> (1, int)
+    v -> (0, int)
  }
 Out list: []
 File table: {-}
-Heap: {
-    1 -> 20 
- }
+Heap: {-}
 
  >>> Program state: 
+Thread ID:0
 Execution stack: {
-    Ref(Ref(int)) a;
-    new(a, v); new(v, 30 ); print(read(read(a)));
+    new(v, 20 );
+    Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
 }
 Symbols table: {
-    v -> (1, int)
+    v -> (0, int)
  }
 Out list: []
 File table: {-}
-Heap: {
-    1 -> 20 
- }
+Heap: {-}
 
  >>> Program state: 
+Thread ID:0
 Execution stack: {
-    new(a, v); new(v, 30 ); print(read(read(a)));
+    new(v, 20 );
+    Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
 }
 Symbols table: {
-    a -> (0, Ref(int))
-    v -> (1, int)
+    v -> (0, int)
  }
 Out list: []
 File table: {-}
-Heap: {
-    1 -> 20 
- }
+Heap: {-}
 
  >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(v, 20 );
+    Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    v -> (0, int)
+ }
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(v, 20 );
+    Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    v -> (0, int)
+ }
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(v, 20 );
+    Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    v -> (0, int)
+ }
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(v, 20 );
+    Ref(Ref(int)) a; new(a, v); new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    v -> (0, int)
+ }
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>> Program state: 
+Thread ID:0
 Execution stack: {
     new(a, v);
     new(v, 30 ); print(read(read(a)));
@@ -98,62 +174,209 @@ Heap: {
  }
 
  >>> Program state: 
+Thread ID:0
 Execution stack: {
+    new(a, v);
     new(v, 30 ); print(read(read(a)));
 }
 Symbols table: {
-    a -> (2, Ref(int))
+    a -> (0, Ref(int))
     v -> (1, int)
  }
 Out list: []
 File table: {-}
 Heap: {
     1 -> 20 
-    2 -> (1, int)
  }
 
  >>> Program state: 
+Thread ID:0
 Execution stack: {
-    new(v, 30 );
-    print(read(read(a)));
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
 }
 Symbols table: {
-    a -> (2, Ref(int))
+    a -> (0, Ref(int))
     v -> (1, int)
  }
 Out list: []
 File table: {-}
 Heap: {
     1 -> 20 
-    2 -> (1, int)
  }
 
  >>> Program state: 
+Thread ID:0
 Execution stack: {
-    print(read(read(a)));
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
 }
 Symbols table: {
-    a -> (2, Ref(int))
-    v -> (3, int)
+    a -> (0, Ref(int))
+    v -> (1, int)
  }
 Out list: []
 File table: {-}
 Heap: {
     1 -> 20 
-    2 -> (1, int)
-    3 -> 30 
  }
 
  >>> Program state: 
-Execution stack: {}
+Thread ID:0
+Execution stack: {
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
+}
 Symbols table: {
-    a -> (2, Ref(int))
-    v -> (3, int)
+    a -> (0, Ref(int))
+    v -> (1, int)
  }
-Out list: [ 20 ]
+Out list: []
 File table: {-}
 Heap: {
     1 -> 20 
-    2 -> (1, int)
-    3 -> 30 
+ }
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    a -> (0, Ref(int))
+    v -> (1, int)
+ }
+Out list: []
+File table: {-}
+Heap: {
+    1 -> 20 
+ }
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    a -> (0, Ref(int))
+    v -> (1, int)
+ }
+Out list: []
+File table: {-}
+Heap: {
+    1 -> 20 
+ }
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    a -> (0, Ref(int))
+    v -> (1, int)
+ }
+Out list: []
+File table: {-}
+Heap: {
+    1 -> 20 
+ }
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    a -> (0, Ref(int))
+    v -> (1, int)
+ }
+Out list: []
+File table: {-}
+Heap: {
+    1 -> 20 
+ }
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    a -> (0, Ref(int))
+    v -> (1, int)
+ }
+Out list: []
+File table: {-}
+Heap: {
+    1 -> 20 
+ }
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    a -> (0, Ref(int))
+    v -> (1, int)
+ }
+Out list: []
+File table: {-}
+Heap: {
+    1 -> 20 
+ }
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    a -> (0, Ref(int))
+    v -> (1, int)
+ }
+Out list: []
+File table: {-}
+Heap: {
+    1 -> 20 
+ }
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    a -> (0, Ref(int))
+    v -> (1, int)
+ }
+Out list: []
+File table: {-}
+Heap: {
+    1 -> 20 
+ }
+
+ >>> Program state: 
+Thread ID:0
+Execution stack: {
+    new(a, v);
+    new(v, 30 ); print(read(read(a)));
+}
+Symbols table: {
+    a -> (0, Ref(int))
+    v -> (1, int)
+ }
+Out list: []
+File table: {-}
+Heap: {
+    1 -> 20 
  }

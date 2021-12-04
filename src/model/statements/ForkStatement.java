@@ -6,7 +6,7 @@ import model.ProgramState;
 public class ForkStatement implements IStatement{
     IStatement statement;
 
-    ForkStatement(IStatement statement){
+    public ForkStatement(IStatement statement){
         this.statement = statement;
     }
 

@@ -188,6 +188,41 @@ public class Interpreter {
         IRepository repository9 = new Repository(program9, "log9.txt");
         Controller controller9 = new Controller(repository9);
 
+        IStatement ex10 = new CompoundStatement(
+            new VariableDeclarationStmt("v", new IntType()),
+            new CompoundStatement(
+                new VariableDeclarationStmt("a", new ReferenceType(new IntType())),
+                new CompoundStatement(
+                    new AssignStmt("a", new ValueExpr((new IntValue(10)))),
+                    new CompoundStatement(
+                        new HeapAllocationStatement("a", new ValueExpr( new IntValue(22))),
+                        new CompoundStatement(
+                            new ForkStatement(
+                                new CompoundStatement(
+                                    new HeapWritingStatement("a", new ValueExpr(new IntValue(30))),
+                                    new CompoundStatement(
+                                        new AssignStmt("v", new ValueExpr(new IntValue(32))),
+                                        new CompoundStatement(
+                                                new PrintStmt(new VariableExpr("v")),
+                                                new PrintStmt(new HeapReadingExpression(new VariableExpr("a")))
+                                        )
+                                    )
+                                )
+                            ),
+                            new CompoundStatement(
+                                    new PrintStmt(new VariableExpr("v")),
+                                    new PrintStmt(new HeapReadingExpression(new VariableExpr("a")))
+                            )
+                        )
+                    )
+                )
+            )
+        );
+        List<ProgramState> program10 = new ArrayList<>();
+        program10.add(new ProgramState(ex10));
+        IRepository repository10 = new Repository(program10, "log10.txt");
+        Controller controller10 = new Controller(repository10);
+
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("x", "exit"));
         menu.addCommand(new RunExample("1", ex1.toString(), controller1));
@@ -197,6 +232,7 @@ public class Interpreter {
         menu.addCommand(new RunExample("5", ex5.toString(), controller5));
         menu.addCommand(new RunExample("6", ex6.toString(), controller6));
         menu.addCommand(new RunExample("9", ex9.toString(), controller9));
+        menu.addCommand(new RunExample("10", ex10.toString(), controller10));
         menu.show();
     }
 }
