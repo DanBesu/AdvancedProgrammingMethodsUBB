@@ -63,6 +63,13 @@ public class SymbolsDict<TKey, TValue> implements IDict<TKey, TValue>{
         return result.toString();
     }
 
+    @Override
+    public IDict<TKey, TValue> cloneDict() {
+        IDict<TKey, TValue> newDictionary = new SymbolsDict<>();
+        dict.forEach(newDictionary::add);
+        return newDictionary;
+    }
+
     public void setContent(Map<TKey, TValue> newContent) {
         dict = newContent;
     }

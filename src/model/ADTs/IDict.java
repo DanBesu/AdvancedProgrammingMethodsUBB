@@ -15,6 +15,7 @@ public interface IDict<TKey, TValue> {
     public void add(TKey key, TValue value);
     public void delete(TKey key);
     public String toString();
+    public IDict<TKey, TValue> cloneDict();
     void setContent(Map<TKey, TValue> newContent);
     Map<TKey, TValue> getContent();
 }

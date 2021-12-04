@@ -33,8 +33,17 @@ public class Repository implements IRepository{
         programStateList.add(programState);
     }
 
+    // remove
     public ProgramState getCurrentProgramState() {
         return programStateList.get(0);
+    }
+
+    public List<ProgramState> getProgramStateList(){
+        return programStateList;
+    }
+
+    public void setProgramStateList(List<ProgramState> newProgramStateList){
+        this.programStateList = newProgramStateList;
     }
 
     public void logProgramStateExecution(ProgramState programState) throws IOException {

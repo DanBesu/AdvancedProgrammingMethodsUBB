@@ -1,6 +1,7 @@
 package model;
 
 import model.ADTs.*;
+import model.exceptions.AdtException;
 import model.statements.IStatement;
 import model.values.IValue;
 import model.values.StringValue;
@@ -9,21 +10,27 @@ import java.io.BufferedReader;
 
 
 public class ProgramState {
-     IStack<IStatement> executionStack;
-     IDict<String, IValue> symbolsDict;
-     IList<IValue> output;
-     IStatement originalProgram;
-     IDict<StringValue, BufferedReader> fileTable;
-     IDict<Integer, IValue> heap;
+    IStack<IStatement> executionStack;
+    IDict<String, IValue> symbolsDict;
+    IList<IValue> output;
+    IStatement originalProgram;
+    IDict<StringValue, BufferedReader> fileTable;
+    IDict<Integer, IValue> heap;
+    int threadID;
+    static int globalThreadCount = 1;
 
     public ProgramState(IStack<IStatement> executionStack,
                         IDict<String, IValue> symbolsDict,
                         IList<IValue> output,
+                        IDict<StringValue, BufferedReader> fileTable,
+                        IDict<Integer, IValue> heap,
                         IStatement originalProgram
     ){
          this.executionStack = executionStack;
          this.symbolsDict = symbolsDict;
          this.output = output;
+         this.fileTable = fileTable;
+         this.heap = heap;
          this.originalProgram = originalProgram;
          this.executionStack.push(originalProgram);
     }
@@ -50,13 +57,16 @@ public class ProgramState {
         return this.heap;
     }
 
-
     public IList<IValue> getOutput() {
         return output;
     }
 
     public IDict<StringValue, BufferedReader> getFileTable() {
         return fileTable;
+    }
+
+    public int getThreadID(){
+        return threadID;
     }
 
     public void setFileTable(IDict<StringValue, BufferedReader> fileTable) {
@@ -67,8 +77,32 @@ public class ProgramState {
         this.heap = heap;
     }
 
+     /* Synchronized keyword in Java has to do with thread-safety,
+     when multiple threads read or write the same variable
+     * It is used to define a block of code
+     where multiple threads can access the same variable in a safe way*/
+
+    public static synchronized int manageThreadID(){
+        int newThreadID = ProgramState.globalThreadCount;
+        ProgramState.globalThreadCount += 1;
+        return newThreadID;
+    }
+
+    public Boolean isNotCompleted(){
+        return !executionStack.isEmpty();
+    }
+
+    public ProgramState oneStep() throws Exception {
+        if(executionStack.isEmpty())
+            throw new AdtException("program state stack is empty");
+
+        IStatement currentStatement = executionStack.pop();
+        return currentStatement.execute(this);
+    }
+
     public String toString(){
         return "\n >>> Program state: \n" +
+                "Thread ID:" + threadID + '\n' +
                 "Execution stack: " + executionStack.toString() + '\n' +
                 "Symbols table: " + symbolsDict.toString() + '\n' +
                 "Out list: " + output.toString() + '\n' +
