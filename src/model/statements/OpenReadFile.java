@@ -41,7 +41,7 @@ public class OpenReadFile implements IStatement {
         BufferedReader fileBuffer = new BufferedReader(new FileReader(filePathString));
         fileTable.add((StringValue) filePathValue, fileBuffer);
 
-        return state;
+        return null;
     }
 
     @Override

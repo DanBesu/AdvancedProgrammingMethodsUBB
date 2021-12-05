@@ -33,12 +33,14 @@ public class AssignStmt implements IStatement{
         IValue expressionValue = expression.eval(symbolsDict, heap);
         IType variableType = symbolsDict.lookup(variableName).getType();
 
+        System.out.println("expressionValue " + expressionValue);
+        System.out.println("variableType " + variableType);
+
         if (expressionValue.getType().equals(variableType))
             symbolsDict.update(variableName, expressionValue);
         else
             throw new ExecutionException("declared type of variable " + variableName + " and current type of the assigned expression do not match");
 
-        return state;
+        return null;
     }
-
 }

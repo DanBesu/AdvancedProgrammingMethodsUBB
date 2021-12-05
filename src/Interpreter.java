@@ -183,6 +183,8 @@ public class Interpreter {
                                 new PrintStmt(new VariableExpr("v")))
                 )
         );
+
+        // int v; Ref int a; v=10; new(a,22); fork(wH(a,30); v=32; print(v); print(rH(a))); print(v); print(rH(a));
         List<ProgramState> program9 = new ArrayList<>();
         program9.add(new ProgramState(ex9));
         IRepository repository9 = new Repository(program9, "log9.txt");
@@ -193,7 +195,7 @@ public class Interpreter {
             new CompoundStatement(
                 new VariableDeclarationStmt("a", new ReferenceType(new IntType())),
                 new CompoundStatement(
-                    new AssignStmt("a", new ValueExpr((new IntValue(10)))),
+                    new AssignStmt("v", new ValueExpr((new IntValue(10)))),
                     new CompoundStatement(
                         new HeapAllocationStatement("a", new ValueExpr( new IntValue(22))),
                         new CompoundStatement(
@@ -223,6 +225,19 @@ public class Interpreter {
         IRepository repository10 = new Repository(program10, "log10.txt");
         Controller controller10 = new Controller(repository10);
 
+        IStatement ex11 = new CompoundStatement(
+                new VariableDeclarationStmt("a", new IntType()),
+                new CompoundStatement(
+                        new VariableDeclarationStmt("b", new IntType()),
+                        new PrintStmt(new VariableExpr("a"))
+                )
+        );
+        List<ProgramState> program11 = new ArrayList<>();
+        program11.add(new ProgramState(ex11));
+        IRepository repository11 = new Repository(program11, "log11.txt");
+        Controller controller11 = new Controller(repository11);
+
+
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("x", "exit"));
         menu.addCommand(new RunExample("1", ex1.toString(), controller1));
@@ -233,6 +248,7 @@ public class Interpreter {
         menu.addCommand(new RunExample("6", ex6.toString(), controller6));
         menu.addCommand(new RunExample("9", ex9.toString(), controller9));
         menu.addCommand(new RunExample("10", ex10.toString(), controller10));
+        menu.addCommand(new RunExample("11", ex11.toString(), controller11));
         menu.show();
     }
 }

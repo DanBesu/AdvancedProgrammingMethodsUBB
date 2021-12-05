@@ -41,6 +41,6 @@ public class IfStmt implements IStatement{
         else
             executionStack.push(elseS);
 
-        return state;
+        return null;
     }
 }

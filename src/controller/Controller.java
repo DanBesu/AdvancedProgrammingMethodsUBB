@@ -1,18 +1,13 @@
 package controller;
 
-import model.ADTs.IStack;
 import model.ProgramState;
-import model.exceptions.AdtException;
-import model.statements.IStatement;
 import model.values.IValue;
 import model.values.ReferenceValue;
 import repository.IRepository;
-import repository.Repository;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -22,16 +17,8 @@ public class Controller {
     IRepository repository;
     ExecutorService executor;
 
-    public Controller(){
-        repository = new Repository();
-    }
-
     public Controller(IRepository repository){
         this.repository = repository;
-    }
-
-    public void addProgramState(ProgramState programState){
-        repository.addProgramState(programState);
     }
 
     public Map<Integer, IValue> safeGarbageCollector(List<Integer> symbolTableAddress, Map<Integer, IValue> heap) {
@@ -54,13 +41,14 @@ public class Controller {
 
     public void oneStepForAllPrograms(List<ProgramState> programStateList) throws InterruptedException {
         // print programState in file
-        programStateList.forEach(programState -> {
-            try {
-                repository.logProgramStateExecution(programState);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+//        programStateList.forEach(programState -> {
+//            try {
+//                repository.logProgramStateExecution(programState);
+////                System.out.println(programState.toString());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
         // run concurrently one step for each of existing ProgramStates
         // 1. prepare the list of callables
         List<Callable<ProgramState>> callList = programStateList // Callable = asynchronous task which can be executed by a separate thread
@@ -117,7 +105,7 @@ public class Controller {
         repository.setProgramStateList(programStateList);
     }
 
-    public List<ProgramState> removeCompletedThreads(List<ProgramState> inProgramList){
-        return inProgramList.stream().filter(ProgramState::isNotCompleted).collect(Collectors.toList());
+    public List<ProgramState> removeCompletedThreads(List<ProgramState> initialList) {
+        return initialList.stream().filter(ProgramState::isNotCompleted).collect(Collectors.toList());
     }
 }

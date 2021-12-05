@@ -14,15 +14,10 @@ public class RunExample extends Command{
     public void execute() {
         try{
             controller.allStep();
-//            ProgramState programState =  controller.allStep();
-//            System.out.println("Output: ");
-//            for(int i = 0; i < programState.getOutput().size(); ++i){
-//                System.out.println(programState.getOutput().getData().get(i));
-//            }
         }
         catch (Exception e){
             // treat the exceptions that can't be solved in the controller
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
 }

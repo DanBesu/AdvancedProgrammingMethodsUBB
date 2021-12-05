@@ -14,28 +14,9 @@ public class Repository implements IRepository{
     List<ProgramState> programStateList;
     String logFilePath;
 
-    public Repository(){
-        programStateList = new ArrayList<>();
-        logFilePath = "";
-    }
-
-    public Repository(String logFilePath){
-        programStateList = new ArrayList<>();
-        this.logFilePath = logFilePath;
-    }
-
     public Repository(List<ProgramState> programStateList, String logFilePath){
         this.programStateList = programStateList;
         this.logFilePath = logFilePath;
-    }
-
-    public void addProgramState(ProgramState programState){
-        programStateList.add(programState);
-    }
-
-    // remove
-    public ProgramState getCurrentProgramState() {
-        return programStateList.get(0);
     }
 
     public List<ProgramState> getProgramStateList(){
@@ -43,14 +24,15 @@ public class Repository implements IRepository{
     }
 
     public void setProgramStateList(List<ProgramState> newProgramStateList){
-        this.programStateList = newProgramStateList;
+        programStateList.clear();
+        programStateList.addAll(newProgramStateList);
     }
 
     public void logProgramStateExecution(ProgramState programState) throws IOException {
         PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
-
-        logFile.write(programState.toString());
-//        logFile.append(programState.toString());
+        System.out.println(programState.toString());
+//        logFile.write(programState.toString());
+        logFile.append(programState.toString());
         logFile.close();
     }
 

@@ -33,6 +33,7 @@ public class ProgramState {
          this.heap = heap;
          this.originalProgram = originalProgram;
          this.executionStack.push(originalProgram);
+         this.threadID = ProgramState.manageThreadID();
     }
 
     public ProgramState(IStatement program){
@@ -43,6 +44,7 @@ public class ProgramState {
          heap = new MyHeap<>();
          this.originalProgram = program;
          this.executionStack.push(program);
+         this.threadID = ProgramState.manageThreadID();
     }
 
     public IStack<IStatement> getExecutionStack() {
@@ -89,11 +91,11 @@ public class ProgramState {
     }
 
     public Boolean isNotCompleted(){
-        return !executionStack.isEmpty();
+        return !(executionStack.size() == 0);
     }
 
     public ProgramState oneStep() throws Exception {
-        if(executionStack.isEmpty())
+        if(executionStack.size() == 0)
             throw new AdtException("program state stack is empty");
 
         IStatement currentStatement = executionStack.pop();
@@ -101,7 +103,8 @@ public class ProgramState {
     }
 
     public String toString(){
-        return "\n >>> Program state: \n" +
+        return "\n >>>.................................................................>>> " +
+                "Program state: \n" +
                 "Thread ID:" + threadID + '\n' +
                 "Execution stack: " + executionStack.toString() + '\n' +
                 "Symbols table: " + symbolsDict.toString() + '\n' +

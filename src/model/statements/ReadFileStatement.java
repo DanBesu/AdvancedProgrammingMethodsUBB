@@ -54,7 +54,7 @@ public class ReadFileStatement implements IStatement{
         else
             symbolsTable.update(this.variableName, new IntValue(Integer.parseInt(currentLine)));
 
-        return state;
+        return null;
     }
 
     public String toString(){

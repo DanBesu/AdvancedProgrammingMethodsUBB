@@ -13,7 +13,7 @@ public class ForkStatement implements IStatement{
     @Override
     public ProgramState execute(ProgramState parentThread) throws Exception {
         return statement == null ? null : new ProgramState(
-                new ExecutionStack<>(),
+                new ExecutionStack<IStatement>(),
                 parentThread.getSymbolsDict().cloneDict(),
                 parentThread.getOutput(),
                 parentThread.getFileTable(),

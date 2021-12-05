@@ -23,7 +23,7 @@ public class VariableDeclarationStmt implements IStatement{
             throw new EvaluationException("this variable name has been already declared, try another one");
 
         symbolsDict.add(name, type.getDefaultValue());
-        return state;
+        return null;
     }
 
     public String toString(){

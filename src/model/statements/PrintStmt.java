@@ -26,6 +26,6 @@ public class PrintStmt implements IStatement {
 
         IValue expressionValue = expression.eval(symbolsTable, heap);
         outputList.add(expressionValue);
-        return state;
+        return null;
     }
 }
