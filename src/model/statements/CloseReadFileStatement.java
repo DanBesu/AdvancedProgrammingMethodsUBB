@@ -4,6 +4,7 @@ import model.ADTs.IDict;
 import model.ProgramState;
 import model.exceptions.EvaluationException;
 import model.expressions.IExpression;
+import model.types.IType;
 import model.types.StringType;
 import model.values.IValue;
 import model.values.StringValue;
@@ -40,6 +41,13 @@ public class CloseReadFileStatement implements IStatement{
         fileTable.delete((StringValue) filePathValue);
 
         return null;
+    }
+
+    @Override
+    public IDict<String, IType> typeCheck(IDict<String, IType> typeEnvironment) throws Exception {
+        if (filePath.typeCheck(typeEnvironment).equals(new StringType()))
+            throw new EvaluationException("File path should be a string!");
+        return typeEnvironment;
     }
 
     public String toString(){

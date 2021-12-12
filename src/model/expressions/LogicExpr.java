@@ -3,6 +3,7 @@ import model.ADTs.IDict;
 import model.exceptions.AdtException;
 import model.exceptions.EvaluationException;
 import model.types.BoolType;
+import model.types.IType;
 import model.values.BoolValue;
 import model.values.IValue;
 
@@ -31,6 +32,19 @@ public class LogicExpr implements IExpression{
             case "or" -> new BoolValue(bool1.getValue() || bool2.getValue());
             default -> throw new EvaluationException("invalid boolean operator");
         };
+    }
+
+    @Override
+    public IType typeCheck(IDict<String, IType> typeEnv) throws Exception {
+        IType type1 = expression1.typeCheck(typeEnv);
+        IType type2 = expression2.typeCheck(typeEnv);
+
+        if(!type1.equals(new BoolType()))
+            throw new EvaluationException("the first operand is not a boolean");
+        if(!type2.equals(new BoolType()))
+            throw new EvaluationException("the second operand is not a boolean");
+
+        return new BoolType();
     }
 
     public String toString(){

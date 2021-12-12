@@ -4,6 +4,7 @@ import model.ADTs.IDict;
 import model.ProgramState;
 import model.exceptions.EvaluationException;
 import model.expressions.IExpression;
+import model.types.IType;
 import model.types.IntType;
 import model.types.StringType;
 import model.values.IValue;
@@ -55,6 +56,16 @@ public class ReadFileStatement implements IStatement{
             symbolsTable.update(this.variableName, new IntValue(Integer.parseInt(currentLine)));
 
         return null;
+    }
+
+    @Override
+    public IDict<String, IType> typeCheck(IDict<String, IType> typeEnv) throws Exception {
+        if(!typeEnv.lookup(variableName).equals(new IntType()))
+            throw new EvaluationException("Read file: " + variableName + " is not an integer");
+        if(!filePath.typeCheck(typeEnv).equals(new StringType()))
+            throw new EvaluationException("Read file: the file path should be a string");
+
+        return typeEnv;
     }
 
     public String toString(){

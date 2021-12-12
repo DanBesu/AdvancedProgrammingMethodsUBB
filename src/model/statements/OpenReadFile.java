@@ -1,12 +1,12 @@
 package model.statements;
 
 import model.ADTs.IDict;
-import model.ADTs.IStack;
 import model.ProgramState;
 import model.exceptions.AdtException;
 import model.exceptions.EvaluationException;
 import model.exceptions.ExecutionException;
 import model.expressions.IExpression;
+import model.types.IType;
 import model.types.StringType;
 import model.values.IValue;
 import model.values.StringValue;
@@ -42,6 +42,13 @@ public class OpenReadFile implements IStatement {
         fileTable.add((StringValue) filePathValue, fileBuffer);
 
         return null;
+    }
+
+    @Override
+    public IDict<String, IType> typeCheck(IDict<String, IType> typeEnv) throws Exception {
+        if(!filePath.typeCheck(typeEnv).equals(new StringType()))
+            throw new EvaluationException("Open File: The filepath should be a string");
+        return typeEnv;
     }
 
     @Override

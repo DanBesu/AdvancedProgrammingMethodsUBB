@@ -1,7 +1,10 @@
 import controller.Controller;
+import model.ADTs.IDict;
+import model.ADTs.SymbolsDict;
 import model.ProgramState;
 import model.expressions.*;
 import model.statements.*;
+import model.types.IType;
 import model.types.IntType;
 import model.types.ReferenceType;
 import model.types.StringType;
@@ -290,6 +293,13 @@ public class Interpreter {
                     )
                 )
             );
+        try {
+            IDict<String, IType> typeEnvironment = new SymbolsDict<>();
+            ex12.typeCheck(typeEnvironment);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
         List<ProgramState> program12 = new ArrayList<>();
         program12.add(new ProgramState(ex12));
         IRepository repository12 = new Repository(program12, "log12.txt");

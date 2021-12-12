@@ -46,6 +46,17 @@ public class HeapAllocationStatement implements IStatement{
     }
 
     @Override
+    public IDict<String, IType> typeCheck(IDict<String, IType> typeEnv) throws Exception {
+        IType variableType = typeEnv.lookup(variableName);
+        IType expressionType = expression.typeCheck(typeEnv);
+
+        if(!variableType.equals(new ReferenceType(expressionType)))
+            throw new EvaluationException("New: The variable name and the expression have different types");
+
+        return typeEnv;
+    }
+
+    @Override
     public String toString() {
         return "new(" + variableName + ", " + expression.toString() + ")";
     }

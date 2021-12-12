@@ -1,7 +1,9 @@
 package model.statements;
 
+import model.ADTs.IDict;
 import model.ADTs.IStack;
 import model.ProgramState;
+import model.types.IType;
 
 public class CompoundStatement implements IStatement {
     IStatement statement1;
@@ -21,5 +23,10 @@ public class CompoundStatement implements IStatement {
         executionStack.push(statement2);
         executionStack.push(statement1);
         return null;
+    }
+
+    @Override
+    public IDict<String, IType> typeCheck(IDict<String, IType> typeEnvironment) throws Exception {
+        return statement2.typeCheck(statement1.typeCheck(typeEnvironment));
     }
 }

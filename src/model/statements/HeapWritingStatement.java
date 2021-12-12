@@ -5,6 +5,7 @@ import model.ProgramState;
 import model.exceptions.EvaluationException;
 import model.expressions.IExpression;
 import model.types.IType;
+import model.types.ReferenceType;
 import model.values.IValue;
 import model.values.ReferenceValue;
 
@@ -41,6 +42,14 @@ public class HeapWritingStatement implements IStatement{
 
         heap.update(heapPosition, expressionValue);
         return null;
+    }
+
+    @Override
+    public IDict<String, IType> typeCheck(IDict<String, IType> typeEnvironment) throws Exception {
+        IType expType = expression.typeCheck(typeEnvironment);
+        if (!typeEnvironment.lookup(variableName).equals(new ReferenceType(expType)))
+            throw new EvaluationException("HeapWritingStatement: right hand side and left hand side have different types!");
+        return typeEnvironment;
     }
 
     @Override

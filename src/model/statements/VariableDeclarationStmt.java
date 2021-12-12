@@ -26,6 +26,12 @@ public class VariableDeclarationStmt implements IStatement{
         return null;
     }
 
+    @Override
+    public IDict<String, IType> typeCheck(IDict<String, IType> typeEnvironment) throws Exception {
+        typeEnvironment.add(name, type);
+        return typeEnvironment;
+    }
+
     public String toString(){
         return type.toString() + " " + name;
     }

@@ -43,4 +43,15 @@ public class AssignStmt implements IStatement{
 
         return null;
     }
+
+    @Override
+    public IDict<String, IType> typeCheck(IDict<String, IType> typeEnv) throws Exception {
+        IType typeVariable = typeEnv.lookup(variableName);
+        IType typeExpression = expression.typeCheck(typeEnv);
+
+        if(!typeVariable.equals(typeExpression))
+            throw new EvaluationException("Assignment: right hand side and left hand side have different types");
+
+        return typeEnv;
+    }
 }

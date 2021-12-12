@@ -8,6 +8,7 @@ import model.exceptions.EvaluationException;
 import model.exceptions.ExecutionException;
 import model.expressions.IExpression;
 import model.types.BoolType;
+import model.types.IType;
 import model.values.BoolValue;
 import model.values.IValue;
 
@@ -42,5 +43,18 @@ public class IfStmt implements IStatement{
             executionStack.push(elseS);
 
         return null;
+    }
+
+    @Override
+    public IDict<String, IType> typeCheck(IDict<String, IType> typeEnv) throws Exception {
+        IType conditionType = condition.typeCheck(typeEnv);
+
+        if(!conditionType.equals(new BoolType()))
+            throw new EvaluationException("IF: the condition is not boolean");
+
+        thenS.typeCheck(typeEnv.cloneDict());
+        elseS.typeCheck(typeEnv.cloneDict());
+
+        return typeEnv;
     }
 }

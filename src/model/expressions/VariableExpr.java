@@ -2,6 +2,7 @@ package model.expressions;
 
 import model.ADTs.IDict;
 import model.exceptions.AdtException;
+import model.types.IType;
 import model.values.IValue;
 
 public class VariableExpr implements IExpression{
@@ -17,5 +18,10 @@ public class VariableExpr implements IExpression{
 
     public String toString(){
         return variableName;
+    }
+
+    @Override
+    public IType typeCheck(IDict<String, IType> typeEnv) throws Exception {
+        return typeEnv.lookup(variableName);
     }
 }
