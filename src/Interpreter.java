@@ -190,6 +190,7 @@ public class Interpreter {
         IRepository repository9 = new Repository(program9, "log9.txt");
         Controller controller9 = new Controller(repository9);
 
+        // int v; Ref int a; v=10; new(a,22); fork(wH(a,30); v=32; print(v); print(rH(a))); print(v); print(rH(a));
         IStatement ex10 = new CompoundStatement(
             new VariableDeclarationStmt("v", new IntType()),
             new CompoundStatement(
@@ -237,6 +238,62 @@ public class Interpreter {
         IRepository repository11 = new Repository(program11, "log11.txt");
         Controller controller11 = new Controller(repository11);
 
+        // 2 forks example
+        // int v; Ref int a; v = 10; new(a, 22);
+        // fork( wH(a,30); v=32; print(v); print(rH(a)) );
+        // fork( wH(a,30); v=32; print(v); print(rH(a)) );
+        // print(v); print(rH(a));
+        IStatement ex12 =
+            new CompoundStatement(
+                new VariableDeclarationStmt("v", new IntType()),
+                new CompoundStatement(
+                    new VariableDeclarationStmt("a", new ReferenceType(new IntType())),
+                    new CompoundStatement(
+                        new AssignStmt("v" ,new ValueExpr(new IntValue(10))),
+                        new CompoundStatement(
+                            new HeapAllocationStatement("a", new ValueExpr(new IntValue(22))),
+                            new CompoundStatement(
+                                new ForkStatement(
+                                    new CompoundStatement(
+                                        new HeapWritingStatement("a", new ValueExpr(new IntValue(30))),
+                                        new CompoundStatement(
+                                            new AssignStmt("v", new ValueExpr(new IntValue(32))),
+                                            new CompoundStatement(
+                                                new PrintStmt(new VariableExpr("v")),
+                                                new PrintStmt(
+                                                        new HeapReadingExpression(new VariableExpr("a"))
+                                                )
+                                            )
+                                        )
+                                    )
+                                ),
+                                new CompoundStatement(
+                                    new ForkStatement(
+                                        new CompoundStatement(
+                                            new HeapWritingStatement("a", new ValueExpr(new IntValue(30))),
+                                            new CompoundStatement(
+                                                new AssignStmt("v", new ValueExpr(new IntValue(32))),
+                                                new CompoundStatement(
+                                                    new PrintStmt(new VariableExpr("v")),
+                                                    new PrintStmt(new HeapReadingExpression(new VariableExpr("a")))
+                                                )
+                                            )
+                                        )
+                                    ),
+                                    new CompoundStatement(
+                                            new PrintStmt(new VariableExpr("v")),
+                                            new PrintStmt(new HeapReadingExpression(new VariableExpr("a")))
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        List<ProgramState> program12 = new ArrayList<>();
+        program12.add(new ProgramState(ex12));
+        IRepository repository12 = new Repository(program12, "log12.txt");
+        Controller controller12 = new Controller(repository12);
 
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("x", "exit"));
@@ -249,6 +306,7 @@ public class Interpreter {
         menu.addCommand(new RunExample("9", ex9.toString(), controller9));
         menu.addCommand(new RunExample("10", ex10.toString(), controller10));
         menu.addCommand(new RunExample("11", ex11.toString(), controller11));
+        menu.addCommand(new RunExample("12", ex12.toString(), controller12));
         menu.show();
     }
 }
