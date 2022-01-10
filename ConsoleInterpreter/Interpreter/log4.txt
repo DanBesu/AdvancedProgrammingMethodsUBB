@@ -1,0 +1,187 @@
+
+ >>> Program state: 
+Execution stack: {
+    string varf; varf = test.in; open read varf; int varc; read file varf varc; read file varf varc; print(varc); close read varf;
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+
+ >>> Program state: 
+Execution stack: {
+    string varf;
+    varf = test.in; open read varf; int varc; read file varf varc; read file varf varc; print(varc); close read varf;
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+
+ >>> Program state: 
+Execution stack: {
+    varf = test.in; open read varf; int varc; read file varf varc; read file varf varc; print(varc); close read varf;
+}
+Symbols table: {
+    varf -> 
+ }
+Out list: []
+File table: {-}
+
+ >>> Program state: 
+Execution stack: {
+    varf = test.in;
+    open read varf; int varc; read file varf varc; read file varf varc; print(varc); close read varf;
+}
+Symbols table: {
+    varf -> 
+ }
+Out list: []
+File table: {-}
+
+ >>> Program state: 
+Execution stack: {
+    open read varf; int varc; read file varf varc; read file varf varc; print(varc); close read varf;
+}
+Symbols table: {
+    varf -> test.in
+ }
+Out list: []
+File table: {-}
+
+ >>> Program state: 
+Execution stack: {
+    open read varf;
+    int varc; read file varf varc; read file varf varc; print(varc); close read varf;
+}
+Symbols table: {
+    varf -> test.in
+ }
+Out list: []
+File table: {-}
+
+ >>> Program state: 
+Execution stack: {
+    int varc; read file varf varc; read file varf varc; print(varc); close read varf;
+}
+Symbols table: {
+    varf -> test.in
+ }
+Out list: []
+File table: {
+    test.in -> java.io.BufferedReader@7530d0a
+ }
+
+ >>> Program state: 
+Execution stack: {
+    int varc;
+    read file varf varc; read file varf varc; print(varc); close read varf;
+}
+Symbols table: {
+    varf -> test.in
+ }
+Out list: []
+File table: {
+    test.in -> java.io.BufferedReader@7530d0a
+ }
+
+ >>> Program state: 
+Execution stack: {
+    read file varf varc; read file varf varc; print(varc); close read varf;
+}
+Symbols table: {
+    varf -> test.in
+    varc -> 0 
+ }
+Out list: []
+File table: {
+    test.in -> java.io.BufferedReader@7530d0a
+ }
+
+ >>> Program state: 
+Execution stack: {
+    read file varf varc;
+    read file varf varc; print(varc); close read varf;
+}
+Symbols table: {
+    varf -> test.in
+    varc -> 0 
+ }
+Out list: []
+File table: {
+    test.in -> java.io.BufferedReader@7530d0a
+ }
+
+ >>> Program state: 
+Execution stack: {
+    read file varf varc; print(varc); close read varf;
+}
+Symbols table: {
+    varf -> test.in
+    varc -> 15 
+ }
+Out list: []
+File table: {
+    test.in -> java.io.BufferedReader@7530d0a
+ }
+
+ >>> Program state: 
+Execution stack: {
+    read file varf varc;
+    print(varc); close read varf;
+}
+Symbols table: {
+    varf -> test.in
+    varc -> 15 
+ }
+Out list: []
+File table: {
+    test.in -> java.io.BufferedReader@7530d0a
+ }
+
+ >>> Program state: 
+Execution stack: {
+    print(varc); close read varf;
+}
+Symbols table: {
+    varf -> test.in
+    varc -> 0 
+ }
+Out list: []
+File table: {
+    test.in -> java.io.BufferedReader@7530d0a
+ }
+
+ >>> Program state: 
+Execution stack: {
+    print(varc);
+    close read varf;
+}
+Symbols table: {
+    varf -> test.in
+    varc -> 0 
+ }
+Out list: []
+File table: {
+    test.in -> java.io.BufferedReader@7530d0a
+ }
+
+ >>> Program state: 
+Execution stack: {
+    close read varf;
+}
+Symbols table: {
+    varf -> test.in
+    varc -> 0 
+ }
+Out list: [ 0 ]
+File table: {
+    test.in -> java.io.BufferedReader@7530d0a
+ }
+
+ >>> Program state: 
+Execution stack: {}
+Symbols table: {
+    varf -> test.in
+    varc -> 0 
+ }
+Out list: [ 0 ]
+File table: {-}
