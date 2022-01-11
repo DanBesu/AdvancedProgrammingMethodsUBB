@@ -1,8 +1,16 @@
 package gui;
 
 import controller.Controller;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 import model.ProgramState;
 import model.expressions.*;
 import model.statements.*;
@@ -15,12 +23,17 @@ import repository.IRepository;
 import repository.Repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProgramListViewController {
 
-    private final List<IStatement> programs = new ArrayList<>();
+    private final Map<String, IStatement> programs = new HashMap<>();
     private final List<Controller> controllers = new ArrayList<>();
+
+    @FXML
+    private ListView<String> programListView;
 
     public ProgramListViewController(){}
 
@@ -42,7 +55,7 @@ public class ProgramListViewController {
         program1.add(new ProgramState(ex1));
         IRepository repository1 = new Repository(program1, "log1.txt");
         Controller controller1 = new Controller(repository1);
-        programs.add(ex1);
+        programs.put("1", ex1);
         controllers.add(controller1);
 
         // ex2
@@ -81,7 +94,7 @@ public class ProgramListViewController {
         program2.add(new ProgramState(ex2));
         IRepository repository2 = new Repository(program2, "log2.txt");
         Controller controller2 = new Controller(repository2);
-        programs.add(ex2);
+        programs.put("2", ex2);
         controllers.add(controller2);
 
         // ex 3
@@ -110,7 +123,7 @@ public class ProgramListViewController {
         program3.add(new ProgramState(ex3));
         IRepository repository3 = new Repository(program3, "log3.txt");
         Controller controller3 = new Controller(repository3);
-        programs.add(ex3);
+        programs.put("3", ex3);
         controllers.add(controller3);
 
         IStatement ex4= new CompoundStatement(
@@ -150,7 +163,7 @@ public class ProgramListViewController {
         program4.add(new ProgramState(ex4));
         IRepository repository4 = new Repository(program4, "log4.txt");
         Controller controller4 = new Controller(repository4);
-        programs.add(ex4);
+        programs.put("4", ex4);
         controllers.add(controller4);
 
         // Ref int v;new(v,20);Ref Ref int a; new(a,v);print(v);print(a)
@@ -165,7 +178,7 @@ public class ProgramListViewController {
         program5.add(new ProgramState(ex5));
         IRepository repository5 = new Repository(program5, "log5.txt");
         Controller controller5 = new Controller(repository5);
-        programs.add(ex5);
+        programs.put("5", ex5);
         controllers.add(controller5);
 
         // Ref int v;new(v,20);Ref Ref int a; new(a,v); new(v,30);print(rH(rH(a)))
@@ -180,7 +193,7 @@ public class ProgramListViewController {
         program6.add(new ProgramState(ex6));
         IRepository repository6 = new Repository(program6, "log6.txt");
         Controller controller6 = new Controller(repository6);
-        programs.add(ex6);
+        programs.put("6", ex6);
         controllers.add(controller6);
 
         IStatement ex9 = new CompoundStatement(
@@ -213,7 +226,7 @@ public class ProgramListViewController {
         program9.add(new ProgramState(ex9));
         IRepository repository9 = new Repository(program9, "log9.txt");
         Controller controller9 = new Controller(repository9);
-        programs.add(ex9);
+        programs.put("9", ex9);
         controllers.add(controller9);
 
         // int v; Ref int a; v=10; new(a,22); fork(wH(a,30); v=32; print(v); print(rH(a))); print(v); print(rH(a));
@@ -251,7 +264,7 @@ public class ProgramListViewController {
         program10.add(new ProgramState(ex10));
         IRepository repository10 = new Repository(program10, "log10.txt");
         Controller controller10 = new Controller(repository10);
-        programs.add(ex10);
+        programs.put("10", ex10);
         controllers.add(controller10);
 
         IStatement ex11 = new CompoundStatement(
@@ -265,7 +278,7 @@ public class ProgramListViewController {
         program11.add(new ProgramState(ex11));
         IRepository repository11 = new Repository(program11, "log11.txt");
         Controller controller11 = new Controller(repository11);
-        programs.add(ex11);
+        programs.put("11", ex11);
         controllers.add(controller11);
 
         // 2 forks example
@@ -324,10 +337,44 @@ public class ProgramListViewController {
         program12.add(new ProgramState(ex12));
         IRepository repository12 = new Repository(program12, "log12.txt");
         Controller controller12 = new Controller(repository12);
-        programs.add(ex12);
+        programs.put("12", ex12);
         controllers.add(controller12);
+
+        List<String> programStringList;
+        List<String> list = new ArrayList<>();
+
+        for(Map.Entry<String, IStatement> item : programs.entrySet()){
+            String text = "Example " + item.getKey() + ": " + item.getValue().toString();
+            list.add(text);
+        }
+        programStringList = list;
+        ObservableList<String> programObservableList = FXCollections.observableArrayList(programStringList);
+        programListView.setItems(programObservableList);
     }
 
     public void onRunProgramButton(ActionEvent actionEvent) {
+        if(programListView.getSelectionModel().getSelectedItem() != null){
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ProgramWindow.fxml"));
+                Parent programWindowView = loader.load();
+
+                ProgramWindowController controller = loader.getController();
+                controller.setController(controllers.get(programListView.getSelectionModel().getSelectedIndex()));
+
+                Stage stage = new Stage();
+                stage.setTitle("Program");
+                stage.setScene(new Scene(programWindowView));
+                stage.showAndWait();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("You need to select one of the programs");
+            alert.setContentText("Please select a program!");
+            alert.showAndWait();
+        }
     }
 }

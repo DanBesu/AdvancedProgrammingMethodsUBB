@@ -4,6 +4,7 @@ import model.ProgramState;
 import model.values.IValue;
 import model.values.ReferenceValue;
 import repository.IRepository;
+import repository.Repository;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -110,5 +111,9 @@ public class Controller {
 
     public List<ProgramState> removeCompletedThreads(List<ProgramState> initialList) {
         return initialList.stream().filter(ProgramState::isNotCompleted).collect(Collectors.toList());
+    }
+
+    public IRepository getRepository() {
+        return repository;
     }
 }
