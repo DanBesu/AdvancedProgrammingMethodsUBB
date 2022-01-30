@@ -355,10 +355,10 @@ public class ProgramListViewController {
     public void onRunProgramButton(ActionEvent actionEvent) {
         if(programListView.getSelectionModel().getSelectedItem() != null){
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("ProgramWindow.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ProgramStatementWindow.fxml"));
                 Parent programWindowView = loader.load();
 
-                ProgramWindowController controller = loader.getController();
+                ProgramStatementWindowController controller = loader.getController();
                 controller.setController(controllers.get(programListView.getSelectionModel().getSelectedIndex()));
 
                 Stage stage = new Stage();

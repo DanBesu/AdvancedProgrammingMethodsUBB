@@ -1,0 +1,11 @@
+
+ >>>.................................................................>>> Program state: 
+Thread ID:3
+Execution stack: {
+    int a;
+    int v; a = 3 ; IF(4  > a) THEN(v = 2 ) ELSE(v = 3 )); print(v);
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+Heap: {-}

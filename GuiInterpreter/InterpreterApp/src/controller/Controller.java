@@ -43,6 +43,35 @@ public class Controller {
                 .collect(Collectors.toList());
     }
 
+    public List<ProgramState> removeCompletedPrograms(List<ProgramState> initialList) {
+        return initialList.stream().filter(p -> p.isNotCompleted()).collect(Collectors.toList());
+    }
+
+    public void oneStepExecution() {
+        executor = Executors.newFixedThreadPool(2);
+
+        removeCompletedPrograms(repository.getProgramStateList());
+
+        List<ProgramState> programsList = repository.getProgramStateList();
+
+        if (programsList.size() > 0) {
+            try {
+                System.out.println("here");
+                oneStepForAllPrograms(repository.getProgramStateList());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            programsList.forEach(p -> {
+                try {
+                    repository.logProgramStateExecution(p);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            });
+        }
+    }
+
     public void oneStepForAllPrograms(List<ProgramState> programStateList) throws InterruptedException {
         // print programState in file
 //        programStateList.forEach(programState -> {
@@ -83,6 +112,7 @@ public class Controller {
             }
         });
         // 5. save the current programs in the repository
+        System.out.println("before set: " + programStateList);
         repository.setProgramStateList(programStateList);
     }
 

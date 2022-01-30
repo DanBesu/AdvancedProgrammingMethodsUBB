@@ -23,13 +23,20 @@ public class Repository implements IRepository{
     }
 
     public void setProgramStateList(List<ProgramState> newProgramStateList){
-        programStateList.clear();
-        programStateList.addAll(newProgramStateList);
+//        System.out.println("setProgramStateList");
+//        System.out.println(newProgramStateList);
+//        programStateList.clear();
+//        System.out.println(" ");
+//        System.out.println(" ");
+//        System.out.println("setProgramStateList");
+//        System.out.println(newProgramStateList);
+//        programStateList.addAll(newProgramStateList);
+        programStateList = newProgramStateList;
     }
 
     public void logProgramStateExecution(ProgramState programState) throws IOException {
         PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
-        System.out.println(programState.toString());
+//        System.out.println("Repo: " + programState.toString());
 //        logFile.write(programState.toString());
         logFile.append(programState.toString());
         logFile.close();

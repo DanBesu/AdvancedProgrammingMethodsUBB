@@ -30,6 +30,10 @@ public class ExecutionStack <TElem> implements IStack<TElem>{
         stack.push(element);
     }
 
+    public Deque<TElem> getStack() {
+        return stack;
+    }
+
     public String toString(){
         if(stack.isEmpty()) {
             return "{}";

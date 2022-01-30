@@ -1,0 +1,65 @@
+
+ >>>.................................................................>>> Program state: 
+Thread ID:1
+Execution stack: {
+    int v;
+    v = 2 ; print(v);
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>>.................................................................>>> Program state: 
+Thread ID:1
+Execution stack: {
+    int v;
+    v = 2 ; print(v);
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>>.................................................................>>> Program state: 
+Thread ID:1
+Execution stack: {
+    int v;
+    v = 2 ; print(v);
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>>.................................................................>>> Program state: 
+Thread ID:1
+Execution stack: {
+    int v;
+    v = 2 ; print(v);
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>>.................................................................>>> Program state: 
+Thread ID:1
+Execution stack: {
+    int v; v = 2 ; print(v);
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+Heap: {-}
+
+ >>>.................................................................>>> Program state: 
+Thread ID:1
+Execution stack: {
+    int v;
+    v = 2 ; print(v);
+}
+Symbols table: {-}
+Out list: []
+File table: {-}
+Heap: {-}
