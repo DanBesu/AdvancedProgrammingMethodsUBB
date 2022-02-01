@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class ProgramListViewController {
 
-    private final Map<String, IStatement> programs = new HashMap<>();
+    private final Map<Integer, IStatement> programs = new HashMap<>();
     private final List<Controller> controllers = new ArrayList<>();
 
     @FXML
@@ -55,7 +55,7 @@ public class ProgramListViewController {
         program1.add(new ProgramState(ex1));
         IRepository repository1 = new Repository(program1, "log1.txt");
         Controller controller1 = new Controller(repository1);
-        programs.put("1", ex1);
+        programs.put(1, ex1);
         controllers.add(controller1);
 
         // ex2
@@ -94,7 +94,7 @@ public class ProgramListViewController {
         program2.add(new ProgramState(ex2));
         IRepository repository2 = new Repository(program2, "log2.txt");
         Controller controller2 = new Controller(repository2);
-        programs.put("2", ex2);
+        programs.put(2, ex2);
         controllers.add(controller2);
 
         // ex 3
@@ -123,7 +123,7 @@ public class ProgramListViewController {
         program3.add(new ProgramState(ex3));
         IRepository repository3 = new Repository(program3, "log3.txt");
         Controller controller3 = new Controller(repository3);
-        programs.put("3", ex3);
+        programs.put(3, ex3);
         controllers.add(controller3);
 
         IStatement ex4= new CompoundStatement(
@@ -163,7 +163,7 @@ public class ProgramListViewController {
         program4.add(new ProgramState(ex4));
         IRepository repository4 = new Repository(program4, "log4.txt");
         Controller controller4 = new Controller(repository4);
-        programs.put("4", ex4);
+        programs.put(4, ex4);
         controllers.add(controller4);
 
         // Ref int v;new(v,20);Ref Ref int a; new(a,v);print(v);print(a)
@@ -178,7 +178,7 @@ public class ProgramListViewController {
         program5.add(new ProgramState(ex5));
         IRepository repository5 = new Repository(program5, "log5.txt");
         Controller controller5 = new Controller(repository5);
-        programs.put("5", ex5);
+        programs.put(5, ex5);
         controllers.add(controller5);
 
         // Ref int v;new(v,20);Ref Ref int a; new(a,v); new(v,30);print(rH(rH(a)))
@@ -193,7 +193,7 @@ public class ProgramListViewController {
         program6.add(new ProgramState(ex6));
         IRepository repository6 = new Repository(program6, "log6.txt");
         Controller controller6 = new Controller(repository6);
-        programs.put("6", ex6);
+        programs.put(6, ex6);
         controllers.add(controller6);
 
         IStatement ex9 = new CompoundStatement(
@@ -226,7 +226,7 @@ public class ProgramListViewController {
         program9.add(new ProgramState(ex9));
         IRepository repository9 = new Repository(program9, "log9.txt");
         Controller controller9 = new Controller(repository9);
-        programs.put("9", ex9);
+        programs.put(9, ex9);
         controllers.add(controller9);
 
         // int v; Ref int a; v=10; new(a,22); fork(wH(a,30); v=32; print(v); print(rH(a))); print(v); print(rH(a));
@@ -264,7 +264,7 @@ public class ProgramListViewController {
         program10.add(new ProgramState(ex10));
         IRepository repository10 = new Repository(program10, "log10.txt");
         Controller controller10 = new Controller(repository10);
-        programs.put("10", ex10);
+        programs.put(10, ex10);
         controllers.add(controller10);
 
         IStatement ex11 = new CompoundStatement(
@@ -278,7 +278,7 @@ public class ProgramListViewController {
         program11.add(new ProgramState(ex11));
         IRepository repository11 = new Repository(program11, "log11.txt");
         Controller controller11 = new Controller(repository11);
-        programs.put("11", ex11);
+        programs.put(11, ex11);
         controllers.add(controller11);
 
         // 2 forks example
@@ -337,16 +337,87 @@ public class ProgramListViewController {
         program12.add(new ProgramState(ex12));
         IRepository repository12 = new Repository(program12, "log12.txt");
         Controller controller12 = new Controller(repository12);
-        programs.put("12", ex12);
+        programs.put(12, ex12);
         controllers.add(controller12);
+
+//        IStatement ex13 = new CompoundStatement(
+//                new VariableDeclarationStmt("a", new ReferenceType(new IntType())),
+//                new CompoundStatement(
+//                        new VariableDeclarationStmt("b", new ReferenceType(new IntType())),
+//                        new CompoundStatement()
+//                )
+//        );
+
+
+        IStatement ex13 = new CompoundStatement(
+            new VariableDeclarationStmt("a", new ReferenceType(new IntType())),
+            new CompoundStatement(
+                new VariableDeclarationStmt("b", new ReferenceType(new IntType())),
+                new CompoundStatement(
+                    new VariableDeclarationStmt("v", new IntType()),
+                    new CompoundStatement(
+                        new HeapAllocationStatement("a", new ValueExpr(new IntValue(0))),
+                        new CompoundStatement(
+                            new HeapAllocationStatement("b", new ValueExpr(new IntValue(0))),
+                            new CompoundStatement(
+                                new HeapWritingStatement("a", new ValueExpr(new IntValue(1))),
+                                new CompoundStatement(
+                                    new HeapWritingStatement("b", new ValueExpr(new IntValue(2))),
+                                    new CompoundStatement(
+                                        new ConditionalAssignment(
+                                            "v",
+                                            new RelationalExpression(
+                                                "<",
+                                                new HeapReadingExpression(new VariableExpr("a")),
+                                                new HeapReadingExpression(new VariableExpr("b"))
+                                            ),
+                                            new ValueExpr(new IntValue(100)),
+                                            new ValueExpr(new IntValue(200))
+                                        ),
+                                        new CompoundStatement(
+                                            new PrintStmt(new VariableExpr("v")),
+                                            new CompoundStatement(
+                                                new ConditionalAssignment(
+                                                    "v",
+                                                    new RelationalExpression(
+                                                        ">",
+                                                        new ArithmeticExpr(
+                                                                '-',
+                                                                new HeapReadingExpression(new VariableExpr("b")),
+                                                                new ValueExpr(new IntValue(2))
+                                                        ),
+                                                        new HeapReadingExpression(new VariableExpr("a"))
+                                                    ),
+                                                    new ValueExpr(new IntValue(100)),
+                                                    new ValueExpr(new IntValue(200))
+                                                ),
+                                                new PrintStmt(new VariableExpr("v"))
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
+        List<ProgramState> program13 = new ArrayList<>();
+        program13.add(new ProgramState(ex13));
+        IRepository repository13 = new Repository(program13, "log13.txt");
+        Controller controller13 = new Controller(repository13);
+        programs.put(13, ex13);
+        controllers.add(controller13);
+
 
         List<String> programStringList;
         List<String> list = new ArrayList<>();
 
-        for(Map.Entry<String, IStatement> item : programs.entrySet()){
+        for(Map.Entry<Integer, IStatement> item : programs.entrySet()){
             String text = "Example " + item.getKey() + ": " + item.getValue().toString();
             list.add(text);
         }
+
         programStringList = list;
         ObservableList<String> programObservableList = FXCollections.observableArrayList(programStringList);
         programListView.setItems(programObservableList);
@@ -360,7 +431,7 @@ public class ProgramListViewController {
 
                 ProgramStatementWindowController controller = loader.getController();
                 controller.setController(controllers.get(programListView.getSelectionModel().getSelectedIndex()));
-
+                System.out.println(programListView.getSelectionModel().getSelectedIndex());
                 Stage stage = new Stage();
                 stage.setTitle("Program");
                 stage.setScene(new Scene(programWindowView));
