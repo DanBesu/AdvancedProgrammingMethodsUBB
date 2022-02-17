@@ -11,6 +11,10 @@ public class NopStmt implements IStatement{
         return state;
     }
 
+    public String toString(){
+        return "";
+    }
+
     @Override
     public IDict<String, IType> typeCheck(IDict<String, IType> typeEnv) throws Exception {
         return typeEnv;

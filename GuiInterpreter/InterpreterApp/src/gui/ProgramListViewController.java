@@ -348,7 +348,6 @@ public class ProgramListViewController {
 //                )
 //        );
 
-
         IStatement ex13 = new CompoundStatement(
             new VariableDeclarationStmt("a", new ReferenceType(new IntType())),
             new CompoundStatement(
@@ -409,6 +408,88 @@ public class ProgramListViewController {
         programs.put(13, ex13);
         controllers.add(controller13);
 
+        // int v; int x; int y; v=0;
+        // repeat(
+        //          fork(print(v); v=v-1;);
+        //          v=v+1;
+        //        ) until v==3
+        // x=1;
+        // nop;
+        // y=3;
+        // nop;
+        // print(v*10)
+        IStatement ex14 = new CompoundStatement(
+                new VariableDeclarationStmt("v", new IntType()),
+                new CompoundStatement(
+                        new VariableDeclarationStmt("x", new IntType()),
+                        new CompoundStatement(
+                                new VariableDeclarationStmt("y", new IntType()),
+                                new CompoundStatement(
+                                        new AssignStmt("v", new ValueExpr(new IntValue(0))),
+                                        new CompoundStatement(
+                                                new RepeatUntilStatement(
+                                                    new CompoundStatement(
+                                                            new ForkStatement(
+                                                                    new CompoundStatement(
+                                                                            new PrintStmt(new VariableExpr("v")),
+                                                                            new AssignStmt(
+                                                                                    "v",
+                                                                                    new ArithmeticExpr(
+                                                                                            '-',
+                                                                                            new VariableExpr("v"),
+                                                                                            new ValueExpr(new IntValue(1))
+                                                                                    )
+                                                                            )
+                                                                    )
+                                                            ),
+                                                            new AssignStmt(
+                                                                    "v",
+                                                                    new ArithmeticExpr(
+                                                                            '+',
+                                                                            new VariableExpr("v"),
+                                                                            new ValueExpr(new IntValue(1))
+                                                                    )
+                                                            )
+                                                    ),
+                                                    new RelationalExpression(
+                                                            "==",
+                                                            new VariableExpr("v"),
+                                                            new ValueExpr(new IntValue(3))
+                                                    )
+                                                ),
+                                                    new CompoundStatement(
+                                                            new AssignStmt(
+                                                                    "x",
+                                                                    new ValueExpr(new IntValue(1))),
+                                                            new CompoundStatement(
+                                                                    new NopStmt(),
+                                                                    new CompoundStatement(
+                                                                            new AssignStmt("y", new ValueExpr(new IntValue(3))),
+                                                                            new CompoundStatement(
+                                                                                    new NopStmt(),
+                                                                                    new PrintStmt(
+                                                                                            new ArithmeticExpr(
+                                                                                                    '*',
+                                                                                                    new VariableExpr("v"),
+                                                                                                    new ValueExpr(new IntValue(10))
+                                                                                            )
+                                                                                    )
+                                                                            )
+                                                                    )
+                                                            )
+                                                    )
+                                        )
+                                )
+                        )
+                )
+        );
+
+        List<ProgramState> program14 = new ArrayList<>();
+        program14.add(new ProgramState(ex14));
+        IRepository repository14 = new Repository(program14, "log14.txt");
+        Controller controller14 = new Controller(repository14);
+        programs.put(14, ex14);
+        controllers.add(controller14);
 
         List<String> programStringList;
         List<String> list = new ArrayList<>();
